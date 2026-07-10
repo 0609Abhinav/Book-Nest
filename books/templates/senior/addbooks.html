@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+    <h1><i class="fa fa-plus-circle"></i> Add a <span class="gold">Book</span></h1>
+    <p>Share your book with thousands of readers on BookNest</p>
+</div>
+
+<div class="container pb-5">
+    <div class="row g-4 justify-content-center">
+        <!-- Form -->
+        <div class="col-lg-6 col-md-8">
+            <div class="bn-form-card">
+                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:24px;">
+                    <i class="fa fa-book" style="color:var(--teal,#00b4d8);"></i> Book Details
+                </h4>
+                <form method="post" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>Book Title *</label>
+                    <input type="text" name="name" required class="form-control" placeholder="e.g. Physics Part I — Class 12"/>
+
+                    <label>Author Name</label>
+                    <input type="text" name="aname" class="form-control" placeholder="e.g. H.C. Verma"/>
+
+                    <label>Category *</label>
+                    <select name="category" class="form-control" required>
+                        <option value="">— Select Category —</option>
+                        {% for x in category %}
+                        <option value="{{ x.cname }}">{{ x.cname }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Useful For *</label>
+                    <input type="text" name="useful" required class="form-control" placeholder="e.g. Class 12 Students, Engineers"/>
+
+                    <label>Price / Charge (₹) *</label>
+                    <input type="number" name="charge" required class="form-control" placeholder="Enter price in ₹ (0 for free)"/>
+
+                    <label>Cover Picture *</label>
+                    <input type="file" name="cp" required class="form-control" accept="image/*"/>
+
+                    <label>Book File <span style="color:#aaa;font-weight:400;">(PDF / DOC / EPUB — optional)</span></label>
+                    <input type="file" name="bf" class="form-control" accept=".pdf,.doc,.docx,.epub"/>
+
+                    <label>Short Description *</label>
+                    <textarea class="form-control" name="short" style="min-height:100px;resize:vertical;" placeholder="Brief description of the book…" required></textarea>
+
+                    <div class="d-flex gap-3 mt-3">
+                        <button type="submit" class="btn-warning btn" style="flex:1;padding:12px;font-size:1rem;">
+                            <i class="fa fa-upload"></i> Submit Book
+                        </button>
+                        <a href="/senior/myprofile/" class="btn btn-outline-secondary" style="flex:1;padding:12px;font-size:1rem;border-radius:10px;text-align:center;">
+                            <i class="fa fa-arrow-left"></i> My Library
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tips sidebar -->
+        <div class="col-lg-4 col-md-8">
+            <div class="bn-form-card" style="background:linear-gradient(160deg,var(--navy,#0d1b2a),#0a2540);color:#fff;">
+                <h5 style="color:var(--teal,#00b4d8);font-weight:700;"><i class="fa fa-lightbulb-o"></i> Tips for a Great Listing</h5>
+                <ul style="padding-left:18px;margin-top:14px;">
+                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Use a clear, high-resolution cover photo</li>
+                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Set a fair price to attract more readers</li>
+                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Upload a PDF/digital copy for free downloads</li>
+                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Write a detailed description including edition and condition</li>
+                    <li style="color:rgba(255,255,255,0.75);font-size:0.88rem;">Choose the correct category so readers find it easily</li>
+                </ul>
+                <hr style="border-color:rgba(255,255,255,0.1);"/>
+                <img src="{% static 'images/books21.jpg' %}" class="img-fluid" style="border-radius:12px;margin-top:10px;" alt="books"/>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+  <h1><i class="fa fa-folder-open"></i> My <span class="teal">Library</span></h1>
+  <p>Manage all the books you've added to BookNest</p>
+</div>
+
+<div class="container pb-5">
+
+  <!-- Action bar -->
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+    <div style="font-size:0.95rem;font-weight:700;color:#1e2d3d">
+      <i class="fa fa-book" style="color:#00b4d8"></i>
+      {% if bookdata %}{{ bookdata|length }} book(s) in your library{% else %}No books yet{% endif %}
+    </div>
+    <a href="/senior/addbooks/" class="btn-edit" style="padding:10px 22px;font-size:0.88rem">
+      <i class="fa fa-plus-circle"></i> Add New Book
+    </a>
+  </div>
+
+  {% if bookdata %}
+
+  <!-- Desktop table -->
+  <div class="d-none d-md-block bn-table-wrap">
+    <table class="bn-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Cover</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in bookdata %}
+        <tr>
+          <td><strong>{{ forloop.counter }}</strong></td>
+          <td>
+            {% if i.coverpic %}
+            <img src="/{{ i.coverpic }}"
+                 style="width:52px;height:52px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15)"
+                 alt="cover"/>
+            {% else %}
+            <div style="width:52px;height:52px;background:#eaf4f8;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:20px">
+              <i class="fa fa-image"></i>
+            </div>
+            {% endif %}
+          </td>
+          <td><strong style="color:#0d1b2a">{{ i.title }}</strong></td>
+          <td style="max-width:240px">
+            <span style="color:#6b7c93;font-size:0.81rem">{{ i.description|truncatechars:75 }}</span>
+          </td>
+          <td><span class="bn-badge bn-badge-category">{{ i.bookcategory }}</span></td>
+          <td><span class="bn-badge bn-badge-gold">₹{{ i.charge }}</span></td>
+          <td>
+            <div class="actions-cell">
+              {% if i.bookfile %}
+              <a href="/{{ i.bookfile }}" class="btn-download" download>
+                <i class="fa fa-download"></i> Download
+              </a>
+              {% else %}
+              <span class="bn-badge bn-badge-nofile"><i class="fa fa-times-circle"></i> No file</span>
+              {% endif %}
+              <a href="/senior/addbooks/" class="btn-edit">
+                <i class="fa fa-plus"></i> Add
+              </a>
+              <a href="/senior/deletebook/{{ i.id }}/"
+                 class="btn-delete"
+                 onclick="return confirm('Delete \'{{ i.title }}\' permanently?')">
+                <i class="fa fa-trash"></i> Delete
+              </a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile cards -->
+  <div class="d-md-none row g-3">
+  {% for i in bookdata %}
+  <div class="col-12">
+    <div style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 4px 18px rgba(0,0,0,0.09);display:flex;gap:12px;align-items:flex-start">
+      {% if i.coverpic %}
+      <img src="/{{ i.coverpic }}" style="width:68px;height:84px;object-fit:cover;border-radius:9px;flex-shrink:0" alt="cover"/>
+      {% endif %}
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:800;color:#0d1b2a;margin-bottom:4px;font-size:0.9rem">{{ i.title }}</div>
+        <span class="bn-badge bn-badge-category" style="margin-bottom:8px;display:inline-block">{{ i.bookcategory }}</span>
+        <div style="font-size:0.76rem;color:#6b7c93;margin-bottom:10px">{{ i.description|truncatechars:55 }}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          {% if i.bookfile %}
+          <a href="/{{ i.bookfile }}" class="btn-download" download style="font-size:0.74rem;padding:5px 10px">
+            <i class="fa fa-download"></i> Download
+          </a>
+          {% endif %}
+          <a href="/senior/addbooks/" class="btn-edit" style="font-size:0.74rem;padding:5px 10px">
+            <i class="fa fa-plus"></i> Add
+          </a>
+          <a href="/senior/deletebook/{{ i.id }}/"
+             class="btn-delete"
+             onclick="return confirm('Delete this book?')"
+             style="font-size:0.74rem;padding:5px 10px">
+            <i class="fa fa-trash"></i> Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+
+  {% else %}
+  <!-- Empty state -->
+  <div style="text-align:center;padding:80px 20px">
+    <div style="font-size:5rem;margin-bottom:16px">📭</div>
+    <h4 style="color:#6b7c93;font-weight:800">Your library is empty</h4>
+    <p style="color:#aab;margin-bottom:24px">Start adding books to share them with the community.</p>
+    <a href="/senior/addbooks/" class="btn-edit" style="padding:12px 28px;font-size:0.95rem">
+      <i class="fa fa-plus-circle"></i> Add Your First Book
+    </a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

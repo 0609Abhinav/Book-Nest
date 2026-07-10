@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+  <h1><i class="fa fa-star"></i> Latest <span class="teal">Books</span></h1>
+  <p>Browse and download books shared by our community</p>
+</div>
+
+<div class="container pb-5">
+  <div class="row g-4">
+
+    <!-- ── Books Grid ── -->
+    <div class="col-lg-9 col-md-8">
+      {% if bdetail %}
+      <div class="row g-3">
+        {% for x in bdetail %}
+        <div class="col-6 col-sm-4 col-lg-3">
+          <div class="book-card">
+            <img src="/{{ x.6 }}" class="book-cover" alt="{{ x.3 }}"
+                 onerror="this.src='{% static 'images/books21.jpg' %}'"/>
+            <div class="book-card-body">
+              <div class="book-title">{{ x.3 }}</div>
+              <div class="book-desc">{{ x.4|truncatechars:65 }}</div>
+              <div class="book-meta">
+                <img src="/{{ x.15 }}" alt="author"
+                     onerror="this.src='{% static 'images/books21.jpg' %}'"/>
+                <div>
+                  <div class="book-meta-name">{{ x.8 }}</div>
+                  <div class="book-meta-loc">{{ x.16 }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="book-footer">
+              <span class="book-charge">₹{{ x.5 }}</span>
+              {% if x.7 %}
+              <a href="/{{ x.7 }}" class="btn-download" download>
+                <i class="fa fa-download"></i> Download
+              </a>
+              {% else %}
+              <span style="font-size:0.72rem;color:#aaa"><i class="fa fa-info-circle"></i> No file</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div style="text-align:center;padding:80px 20px">
+        <div style="font-size:4rem;margin-bottom:16px">🔍</div>
+        <h5 style="color:#6b7c93;font-weight:700">No books found in this category</h5>
+        <p style="color:#aab">Try a different category or
+          <a href="/senior/addbooks/" style="color:#00b4d8;font-weight:700">add the first book!</a>
+        </p>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- ── Category Sidebar ── -->
+    <div class="col-lg-3 col-md-4">
+      <div class="category-sidebar">
+        <h6><i class="fa fa-filter"></i> Filter by Category</h6>
+
+        <a href="/senior/latestbooks/">
+          <div class="cs-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div> All Books
+        </a>
+
+        {% if data %}{% for x in data %}
+        <a href="/senior/latestbooks/?id={{ x.cname }}">
+          <div class="cs-icon">
+            {% if x.cname == "UP BOARD" or x.cname == "UP Board" %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="6" width="32" height="36" rx="3" fill="none"/><path d="M16 6V42" opacity="0.4"/></svg>
+            {% elif x.cname == "CBSC Board" or x.cname == "CBSE Board" %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><path d="M24 8L6 18L24 28L42 18L24 8Z" fill="none"/><path d="M12 22V34L24 40L36 34V22" fill="none"/></svg>
+            {% elif x.cname == "ICSC Board" or x.cname == "ICSE Board" %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><rect x="6" y="10" width="16" height="28" rx="2" fill="none"/><rect x="26" y="10" width="16" height="28" rx="2" fill="none"/></svg>
+            {% elif x.cname == "NOVEL" or x.cname == "Novels" %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 8C8 8 14 6 24 10C34 6 40 8 40 8V38C40 38 34 36 24 40C14 36 8 38 8 38V8Z" fill="none"/><path d="M24 10V40" opacity="0.4"/></svg>
+            {% elif x.cname == "Story Books" %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="6" width="28" height="36" rx="4" fill="none"/><path d="M18 6V42" opacity="0.3"/></svg>
+            {% elif x.cname == "TECHNICAL" or x.cname == "Technical" %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><rect x="6" y="10" width="36" height="24" rx="3" fill="none"/><path d="M18 38H30" stroke-linecap="round"/><path d="M24 34V38"/></svg>
+            {% else %}
+            <svg width="14" height="14" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><path d="M10 8H34L38 12V40H10V8Z" fill="none"/><path d="M34 8V12H38"/></svg>
+            {% endif %}
+          </div> {{ x.cname }}
+        </a>
+        {% endfor %}{% endif %}
+
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1)">
+          <a href="/senior/addbooks/"
+             style="background:var(--gold);color:#fff;display:flex;justify-content:center;align-items:center;gap:6px;padding:10px;border-radius:8px;font-weight:700;font-size:0.82rem;">
+            <i class="fa fa-plus-circle"></i> Add a Book
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

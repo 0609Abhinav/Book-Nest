@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ═══ HERO CAROUSEL ═══ -->
+<div id="heroCarousel" class="carousel slide bn-carousel" data-bs-ride="carousel" data-bs-interval="4500">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+  </div>
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="{% static 'images/books5.jpg' %}" alt="Books"/>
+      <div class="bn-carousel-overlay"></div>
+      <div class="carousel-caption">
+        <div class="caption-tag">📚 Pre-owned Books</div>
+        <h5>Discover Books at<br/>Unbeatable Prices</h5>
+        <p>Find quality textbooks, novels &amp; more — from students, for students.</p>
+        <a href="/senior/latestbooks/" class="bn-carousel-btn">
+          Browse Books <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'images/books3.jpg' %}" alt="Education"/>
+      <div class="bn-carousel-overlay"></div>
+      <div class="carousel-caption">
+        <div class="caption-tag">🎓 All Boards Covered</div>
+        <h5>CBSE · ICSE · UP Board<br/>All Under One Roof</h5>
+        <p>From Class 1 to graduation — every subject, every board.</p>
+        <a href="/senior/latestbooks/?id=UP%20BOARD" class="bn-carousel-btn">
+          Explore Now <i class="fa fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'images/books6.jpg' %}" alt="Share"/>
+      <div class="bn-carousel-overlay"></div>
+      <div class="carousel-caption">
+        <div class="caption-tag">🤝 Share &amp; Earn</div>
+        <h5>Turn Your Old Books<br/>Into Opportunity</h5>
+        <p>List books you no longer need and help a fellow reader.</p>
+        <a href="/senior/addbooks/" class="bn-carousel-btn">
+          Add a Book <i class="fa fa-plus"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- ═══ STATS STRIP ═══ -->
+<div class="bn-stats-strip">
+  <div class="bn-stats-inner">
+    <div class="bn-stat"><div class="num">500+</div><div class="lbl">Books Listed</div></div>
+    <div class="bn-stat"><div class="num">200+</div><div class="lbl">Happy Readers</div></div>
+    <div class="bn-stat"><div class="num">6+</div><div class="lbl">Categories</div></div>
+    <div class="bn-stat"><div class="num">Free</div><div class="lbl">Downloads</div></div>
+  </div>
+</div>
+
+<!-- ═══ CATEGORIES ═══ -->
+<section class="bn-categories-section">
+  <div class="container">
+    <h2 class="bn-section-title">Browse by <span>Category</span></h2>
+    <span class="bn-divider"></span>
+    <p class="bn-section-subtitle">Explore our curated collection across all major boards and genres</p>
+
+    <div class="cat-grid">
+      {% if data %}{% for x in data %}
+      <a href="/senior/latestbooks/?id={{ x.cname }}" class="cat-card" style="--card-delay: {{ forloop.counter0 }}">
+
+        <!-- Professional SVG icon per category -->
+        <div class="cat-icon-wrap">
+          {% if x.cname == "UP BOARD" or x.cname == "UP Board" %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <rect x="8" y="6" width="32" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M16 6V42" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+            <rect x="20" y="12" width="14" height="3" rx="1.5" fill="currentColor" opacity="0.7"/>
+            <rect x="20" y="18" width="10" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <rect x="20" y="23" width="12" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <rect x="20" y="28" width="8" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <circle cx="13" cy="35" r="2.5" fill="currentColor" opacity="0.5"/>
+          </svg>
+
+          {% elif x.cname == "CBSC Board" or x.cname == "CBSE Board" or x.cname == "CBSE" %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <path d="M24 8L6 18L24 28L42 18L24 8Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M12 22V34L24 40L36 34V22" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <line x1="42" y1="18" x2="42" y2="36" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="42" cy="36" r="2" fill="currentColor"/>
+          </svg>
+
+          {% elif x.cname == "ICSC Board" or x.cname == "ICSE Board" or x.cname == "ICSE" %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <rect x="6" y="10" width="16" height="28" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <rect x="26" y="10" width="16" height="28" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <rect x="10" y="16" width="8" height="2" rx="1" fill="currentColor" opacity="0.5"/>
+            <rect x="10" y="21" width="6" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <rect x="30" y="16" width="8" height="2" rx="1" fill="currentColor" opacity="0.5"/>
+            <rect x="30" y="21" width="6" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <path d="M22 20L26 20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.5"/>
+          </svg>
+
+          {% elif x.cname == "NOVEL" or x.cname == "Novels" %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <path d="M8 8C8 8 14 6 24 10C34 6 40 8 40 8V38C40 38 34 36 24 40C14 36 8 38 8 38V8Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M24 10V40" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+            <path d="M14 16C17 14.5 20 14 24 15" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <path d="M14 22C17 20.5 20 20 24 21" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+            <path d="M14 28C17 26.5 20 26 24 27" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+          </svg>
+
+          {% elif x.cname == "Story Books" or x.cname == "Story" %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <rect x="10" y="6" width="28" height="36" rx="4" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M18 6V42" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+            <circle cx="30" cy="18" r="5" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M28 16L30 18L33 15" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+            <rect x="22" y="26" width="10" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <rect x="22" y="31" width="7" height="2" rx="1" fill="currentColor" opacity="0.3"/>
+          </svg>
+
+          {% elif x.cname == "TECHNICAL" or x.cname == "Technical" %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <rect x="6" y="10" width="36" height="24" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M18 38H30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M24 34V38" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M16 20L12 24L16 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+            <path d="M32 20L36 24L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+            <path d="M26 17L22 31" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+
+          {% else %}
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+            <path d="M10 8H34L38 12V40H10V8Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            <path d="M34 8V12H38" stroke="currentColor" stroke-width="2"/>
+            <rect x="16" y="18" width="16" height="2" rx="1" fill="currentColor" opacity="0.5"/>
+            <rect x="16" y="24" width="12" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+            <rect x="16" y="30" width="14" height="2" rx="1" fill="currentColor" opacity="0.3"/>
+          </svg>
+          {% endif %}
+        </div>
+
+        <div class="cat-name">{{ x.cname }}</div>
+        <span class="cat-btn">
+          <span>Explore</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      {% endfor %}{% endif %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ NEW RELEASES ═══ -->
+{% if newdata %}
+<section style="padding:52px 0;background:#fff">
+  <div class="container">
+    <h2 class="bn-section-title">New <span>Releases</span> <span class="accent">🔥</span></h2>
+    <span class="bn-divider"></span>
+    <div class="row g-4">
+      {% for x in newdata %}
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="book-card">
+          <img src="/{{ x.newpic }}" class="book-cover" alt="{{ x.newname }}" style="height:170px;object-fit:cover;"/>
+          <div class="book-card-body">
+            <div class="book-title">{{ x.newname }}</div>
+            <div class="book-desc">Just added to BookNest — grab it while available!</div>
+          </div>
+          <div class="book-footer">
+            <a href="/senior/latestbooks/" class="btn-edit" style="font-size:0.76rem;padding:5px 12px;">
+              <i class="fa fa-eye"></i> View
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══ WHY BOOKNEST ═══ -->
+<section style="padding:52px 0;background:#edf4f8">
+  <div class="container">
+    <h2 class="bn-section-title">Why <span>BookNest</span>?</h2>
+    <span class="bn-divider"></span>
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div class="about-feature-box">
+          <span class="fi">💰</span>
+          <h6>Affordable</h6>
+          <p style="font-size:0.78rem;color:#6b7c93;margin-top:6px">Books at up to 80% less than retail price</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="about-feature-box">
+          <span class="fi">⬇️</span>
+          <h6>Free Downloads</h6>
+          <p style="font-size:0.78rem;color:#6b7c93;margin-top:6px">Download digital copies instantly, no charge</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="about-feature-box">
+          <span class="fi">🤝</span>
+          <h6>Community</h6>
+          <p style="font-size:0.78rem;color:#6b7c93;margin-top:6px">200+ readers sharing &amp; discovering books</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="about-feature-box">
+          <span class="fi">🌿</span>
+          <h6>Eco-Friendly</h6>
+          <p style="font-size:0.78rem;color:#6b7c93;margin-top:6px">Reduce waste by giving books a second life</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SEARCH BY CITY ═══ -->
+{% if citydata %}
+<section style="padding:52px 0;background:#fff">
+  <div class="container">
+    <h2 class="bn-section-title">Find Books <span>Near You</span> 📍</h2>
+    <span class="bn-divider"></span>
+    <div class="row g-3">
+      {% for c in citydata %}
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="book-card">
+          <img src="/{{ c.citypic }}" class="book-cover" alt="{{ c.cityname }}" style="height:130px"/>
+          <div class="book-footer" style="justify-content:center">
+            <a href="#" class="btn-edit" style="font-size:0.8rem;padding:6px 18px">
+              <i class="fa fa-map-marker"></i> {{ c.cityname }}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══ CTA BANNER ═══ -->
+<section style="background:linear-gradient(135deg,#0d1b2a,#0a2540);padding:64px 0;text-align:center">
+  <div class="container">
+    <div style="font-size:3rem;margin-bottom:12px">📦</div>
+    <h2 style="color:#fff;font-size:clamp(1.4rem,3.5vw,2rem);font-weight:900;margin-bottom:10px">
+      Have books collecting dust at home?
+    </h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:0.98rem;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto">
+      List them on BookNest and help a student in need — completely free!
+    </p>
+    <a href="/senior/addbooks/" style="display:inline-flex;align-items:center;gap:8px;background:#f4a11d;color:#fff;padding:14px 32px;border-radius:10px;font-weight:800;font-size:1rem;text-decoration:none;box-shadow:0 6px 20px rgba(244,161,29,0.45);transition:all .25s">
+      <i class="fa fa-plus-circle"></i> Add a Book Now
+    </a>
+  </div>
+</section>
+
+{% endblock %}

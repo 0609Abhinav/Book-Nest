@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+    <h1>About <span class="teal">BookNest</span></h1>
+    <p>India's trusted platform for pre-owned book exchange and discovery</p>
+</div>
+
+<div class="container py-5">
+    <!-- Mission -->
+    <div class="row g-4 align-items-center mb-5">
+        <div class="col-md-6">
+            <h2 style="font-weight:800;color:var(--navy,#0d1b2a);">Our <span style="color:var(--teal,#00b4d8);">Mission</span></h2>
+            <span class="bn-divider" style="margin:12px 0;display:block;"></span>
+            <p style="color:#555;line-height:1.8;">
+                BookNest is an online venture to serve pre-owned books throughout India. We are <strong>India's first community-driven marketplace for second-hand books.</strong>
+                We partner with multiple second-hand retailers and markets around various cities, expanding our inventory and ease of access.
+            </p>
+            <p style="color:#555;line-height:1.8;">
+                We deal with the educational sector including School, College, University — and the recreational sector including Novels and activity-oriented books for kids.
+                Our aim is to bridge the gap between people looking for used books and those willing to share them.
+            </p>
+            <a href="/senior/latestbooks/" class="btn-edit" style="display:inline-flex;margin-top:10px;padding:12px 28px;">
+                <i class="fa fa-search"></i> Browse Books
+            </a>
+        </div>
+        <div class="col-md-6 text-center">
+            <div style="background:linear-gradient(135deg,var(--navy,#0d1b2a),#0a2540);border-radius:20px;padding:40px;display:inline-block;box-shadow:0 12px 40px rgba(0,0,0,0.2);">
+                <i class="fa fa-book" style="font-size:5rem;color:var(--teal,#00b4d8);display:block;margin-bottom:12px;"></i>
+                <div style="color:#fff;font-size:1.3rem;font-weight:800;">Book<span style="color:var(--teal,#00b4d8);">Nest</span></div>
+                <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:4px;">Your Book Exchange Hub</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="row g-4 mb-5">
+        <div class="col-12"><h2 class="bn-section-title">Why Choose <span>Us?</span></h2><span class="bn-divider"></span></div>
+        <div class="col-6 col-md-3"><div class="about-feature-box"><i class="fa fa-rupee"></i><h6>Affordable Prices</h6><p style="font-size:0.8rem;color:#777;">Books at 50–80% less than retail</p></div></div>
+        <div class="col-6 col-md-3"><div class="about-feature-box"><i class="fa fa-recycle"></i><h6>Eco Friendly</h6><p style="font-size:0.8rem;color:#777;">Reduce, Reuse, Recycle books</p></div></div>
+        <div class="col-6 col-md-3"><div class="about-feature-box"><i class="fa fa-download"></i><h6>Free Downloads</h6><p style="font-size:0.8rem;color:#777;">Digital copies available instantly</p></div></div>
+        <div class="col-6 col-md-3"><div class="about-feature-box"><i class="fa fa-graduation-cap"></i><h6>All Boards</h6><p style="font-size:0.8rem;color:#777;">CBSE, ICSE, UP Board & more</p></div></div>
+    </div>
+
+    <!-- Team -->
+    <div class="row mb-5">
+        <div class="col-12"><h2 class="bn-section-title">Meet the <span>Founder</span></h2><span class="bn-divider"></span></div>
+        <div class="col-md-6 mx-auto">
+            <div style="background:#fff;border-radius:20px;padding:36px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+                <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--teal,#00b4d8),var(--navy,#0d1b2a));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2.5rem;color:#fff;">
+                    <i class="fa fa-user"></i>
+                </div>
+                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:4px;">Abhinav Tripathi</h4>
+                <span style="display:inline-block;background:rgba(0,180,216,0.12);color:var(--teal2,#0096c7);padding:4px 16px;border-radius:50px;font-size:0.82rem;font-weight:700;margin-bottom:16px;">Founder & Developer</span>
+                <p style="color:#666;line-height:1.8;font-size:0.9rem;">
+                    Abhinav is passionate about making quality education accessible to everyone. With a strong technical background in software development, he built BookNest to connect readers and help students access affordable books across India.
+                </p>
+                <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;">
+                    <a href="https://www.instagram.com/_abhinavtripathi/" target="_blank" style="background:#e1306c;color:#fff;width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;"><i class="fa fa-instagram"></i></a>
+                    <a href="https://wa.me/919621854341" target="_blank" style="background:#25d366;color:#fff;width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;"><i class="fa fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 18px rgba(0,0,0,0.08);height:100%;">
+                <h4 style="color:var(--navy,#0d1b2a);font-weight:700;border-left:4px solid var(--teal,#00b4d8);padding-left:12px;">Our Story</h4>
+                <p style="color:#666;line-height:1.8;font-size:0.9rem;margin-top:12px;">
+                    We observed a lot of books going to waste and eventually started collecting and sharing them. Starting from a small collection, we built BookNest to create a digital platform where everyone can discover, share, and download books — anywhere in India.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 18px rgba(0,0,0,0.08);height:100%;">
+                <h4 style="color:var(--navy,#0d1b2a);font-weight:700;border-left:4px solid var(--gold,#f4a11d);padding-left:12px;">Our Operations</h4>
+                <p style="color:#666;line-height:1.8;font-size:0.9rem;margin-top:12px;">
+                    We believe education's prime support is books. We take steps to distribute books to financially weak students. We welcome schools and colleges to <a href="/senior/contactus/" style="color:var(--teal,#00b4d8);font-weight:700;">contact us</a> for partnerships and book drives.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

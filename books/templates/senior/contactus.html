@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+    <h1><i class="fa fa-envelope"></i> Contact <span class="teal">Us</span></h1>
+    <p>We'd love to hear from you — reach out anytime</p>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <!-- Contact Info Cards -->
+        <div class="col-lg-5">
+            <div style="display:flex;flex-direction:column;gap:18px;">
+                <!-- Address -->
+                <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 18px rgba(0,0,0,0.08);display:flex;gap:16px;align-items:flex-start;">
+                    <div style="width:46px;height:46px;border-radius:12px;background:rgba(0,180,216,0.12);color:var(--teal,#00b4d8);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                    <div>
+                        <h6 style="font-weight:700;color:var(--navy,#0d1b2a);margin-bottom:4px;">Office Address</h6>
+                        <p style="color:#666;font-size:0.88rem;margin:0;line-height:1.6;">Government Polytechnic Aurai Bhadohi,<br/>Uttar Pradesh, India<br/>PIN: 221401</p>
+                    </div>
+                </div>
+                <!-- Phone -->
+                <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 18px rgba(0,0,0,0.08);display:flex;gap:16px;align-items:flex-start;">
+                    <div style="width:46px;height:46px;border-radius:12px;background:rgba(37,211,102,0.12);color:#25d366;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">
+                        <i class="fa fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h6 style="font-weight:700;color:var(--navy,#0d1b2a);margin-bottom:4px;">Call / WhatsApp</h6>
+                        <a href="https://wa.me/919621854341" target="_blank" style="color:var(--teal,#00b4d8);font-weight:700;font-size:1rem;text-decoration:none;">+91-9621854341</a>
+                        <p style="color:#aaa;font-size:0.8rem;margin:4px 0 0;">Click to open WhatsApp</p>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 18px rgba(0,0,0,0.08);display:flex;gap:16px;align-items:flex-start;">
+                    <div style="width:46px;height:46px;border-radius:12px;background:rgba(244,161,29,0.12);color:var(--gold,#f4a11d);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h6 style="font-weight:700;color:var(--navy,#0d1b2a);margin-bottom:4px;">Email Us</h6>
+                        <p style="color:#666;font-size:0.9rem;margin:0;">abhinavt@booknest.in</p>
+                    </div>
+                </div>
+                <!-- Hours -->
+                <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 18px rgba(0,0,0,0.08);display:flex;gap:16px;align-items:flex-start;">
+                    <div style="width:46px;height:46px;border-radius:12px;background:rgba(13,27,42,0.08);color:var(--navy,#0d1b2a);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div>
+                        <h6 style="font-weight:700;color:var(--navy,#0d1b2a);margin-bottom:4px;">Working Hours</h6>
+                        <p style="color:#666;font-size:0.88rem;margin:0;">Mon–Sat: 9 AM – 6 PM<br/>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-lg-7">
+            <div class="bn-form-card">
+                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:6px;"><i class="fa fa-paper-plane" style="color:var(--teal,#00b4d8);"></i> Send Us a Message</h4>
+                <p style="color:#7a8fa6;font-size:0.88rem;margin-bottom:24px;">We typically reply within 24 hours.</p>
+                <form method="post" autocomplete="off">
+                    {% csrf_token %}
+                    {% if S %}
+                    <div class="alert alert-success">
+                        <i class="fa fa-check-circle"></i> &nbsp;Thanks for reaching out! We'll get back to you shortly.
+                    </div>
+                    {% endif %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label>Your Name *</label>
+                            <input type="text" class="form-control" name="name" placeholder="Full name" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Email Address *</label>
+                            <input type="email" class="form-control" name="email" placeholder="you@example.com" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Mobile Number</label>
+                            <input type="text" class="form-control" name="mobile" placeholder="+91 XXXXX XXXXX"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="Your city / area"/>
+                        </div>
+                        <div class="col-12">
+                            <label>Message *</label>
+                            <textarea class="form-control" name="msg" style="min-height:130px;resize:vertical;" placeholder="Type your message here…" required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn-warning btn w-100" style="padding:13px;font-size:1rem;">
+                                <i class="fa fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:16px;"><i class="fa fa-map" style="color:var(--teal,#00b4d8);"></i> Find Us on Map</h4>
+            <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28839.863638791412!2d82.51398040202982!3d25.371887740543134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398fe7319a9636b9%3A0x33a5babe4b68b207!2sPipris%2C%20Uttar%20Pradesh%20221401!5e0!3m2!1sen!2sin!4v1632893051630!5m2!1sen!2sin"
+                        width="100%" height="380" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

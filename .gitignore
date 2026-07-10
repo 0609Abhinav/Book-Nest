@@ -1,0 +1,92 @@
+# ================================================================
+#  BookNest — .gitignore
+# ================================================================
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# ── Virtual Environments ──
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# ── Django ──
+*.log
+db.sqlite3
+db.sqlite3-journal
+*.mo
+*.pot
+staticfiles/
+media/
+
+# ── User-uploaded content (served from static/ sub-dirs) ──
+books/static/addbooks/
+books/static/signup/
+books/static/category/
+books/static/city/
+books/static/newrelesed/
+books/static/bookfiles/
+
+# ── Django migrations (optional — uncomment if you want to track them) ──
+# books/senior/migrations/
+
+# ── Environment / Secrets ──
+.env
+.env.*
+*.env
+secrets.json
+
+# ── IDE / Editor ──
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# ── OS generated files ──
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Distribution / Build ──
+dist/
+build/
+*.egg-info/
+*.egg
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Testing / Coverage ──
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+
+# ── Jupyter Notebook ──
+.ipynb_checkpoints/
+
+# ── Misc ──
+*.bak
+*.tmp
+*.temp
+*.orig
