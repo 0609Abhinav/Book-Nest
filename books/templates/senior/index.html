@@ -3,63 +3,63 @@
 {% block content %}
 
 <!-- Hero Section -->
-<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner">
+<div class="swiper heroSwiper" style="height: 600px; width: 100%; position: relative;">
+    <div class="swiper-wrapper">
         <!-- Slide 1 -->
-        <div class="carousel-item active position-relative" style="height: 600px;">
-            <img src="{% static 'images/hero1.png' %}" class="d-block w-100 h-100" style="object-fit: cover; filter: brightness(0.6);" alt="Hero 1">
-            <div class="carousel-caption d-flex flex-column justify-content-center h-100" style="bottom: 0; padding-bottom: 50px;">
-                <h1 class="display-3 fw-bold text-white mb-3 fade-up visible">Discover. Share. <span style="color: var(--teal-light);">Read.</span></h1>
-                <p class="lead text-white-50 mb-5 fade-up visible" style="transition-delay: 100ms; max-width: 600px; margin: 0 auto;">Join India's fastest growing community of readers. Exchange academic books, novels, and more.</p>
-                <div class="d-flex justify-content-center gap-3 fade-up visible" style="transition-delay: 200ms;">
-                    <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5" style="border-radius: 50px;">Browse Library</a>
+        <div class="swiper-slide position-relative overflow-hidden">
+            <div class="swiper-zoom-container">
+                <img src="{% static 'images/hero1.png' %}" class="w-100 h-100" style="object-fit: cover; filter: brightness(0.5);" alt="Hero 1">
+            </div>
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
+                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300">Discover. Share. <span style="color: var(--teal-light);">Read.</span></h1>
+                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto;">Join India's fastest growing community of readers. Exchange academic books, novels, and more.</p>
+                <div class="d-flex justify-content-center gap-3" data-swiper-parallax="-100">
+                    <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5 shadow-lg" style="border-radius: 50px;">Browse Library</a>
                     <a href="{% url 'addbooks' %}" class="btn btn-outline-light btn-lg px-5" style="border-radius: 50px; border-width: 2px;">Share a Book</a>
                 </div>
             </div>
         </div>
         
         <!-- Slide 2 -->
-        <div class="carousel-item position-relative" style="height: 600px;">
-            <img src="{% static 'images/hero2.png' %}" class="d-block w-100 h-100" style="object-fit: cover; filter: brightness(0.6);" alt="Hero 2">
-            <div class="carousel-caption d-flex flex-column justify-content-center h-100" style="bottom: 0; padding-bottom: 50px;">
-                <h1 class="display-3 fw-bold text-white mb-3">Your Digital <span style="color: var(--gold);">Library</span></h1>
-                <p class="lead text-white-50 mb-5" style="max-width: 600px; margin: 0 auto;">Access thousands of technical resources, board materials, and stories contributed by seniors.</p>
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="{% url 'signup' %}" class="btn btn-warning btn-lg px-5 text-navy fw-bold" style="border-radius: 50px;">Join the Community</a>
+        <div class="swiper-slide position-relative overflow-hidden">
+            <div class="swiper-zoom-container">
+                <img src="{% static 'images/hero2.png' %}" class="w-100 h-100" style="object-fit: cover; filter: brightness(0.5);" alt="Hero 2">
+            </div>
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
+                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300">Your Digital <span style="color: var(--gold);">Library</span></h1>
+                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto;">Access thousands of technical resources, board materials, and stories contributed by seniors.</p>
+                <div class="d-flex justify-content-center gap-3" data-swiper-parallax="-100">
+                    <a href="{% url 'signup' %}" class="btn btn-warning btn-lg px-5 text-navy fw-bold shadow-lg" style="border-radius: 50px;">Join the Community</a>
                 </div>
             </div>
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item position-relative" style="height: 600px;">
-            <img src="{% static 'images/hero3.png' %}" class="d-block w-100 h-100" style="object-fit: cover; filter: brightness(0.6);" alt="Hero 3">
-            <div class="carousel-caption d-flex flex-column justify-content-center h-100" style="bottom: 0; padding-bottom: 50px;">
-                <h1 class="display-3 fw-bold text-white mb-3">Smart <span style="color: var(--teal-light);">Exchange</span></h1>
-                <p class="lead text-white-50 mb-5" style="max-width: 600px; margin: 0 auto;">List the books you don't need, find the ones you do. Sustainable reading for everyone.</p>
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5" style="border-radius: 50px;">Start Exploring</a>
+        <div class="swiper-slide position-relative overflow-hidden">
+            <div class="swiper-zoom-container">
+                <img src="{% static 'images/hero3.png' %}" class="w-100 h-100" style="object-fit: cover; filter: brightness(0.5);" alt="Hero 3">
+            </div>
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
+                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300">Smart <span style="color: var(--teal-light);">Exchange</span></h1>
+                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto;">List the books you don't need, find the ones you do. Sustainable reading for everyone.</p>
+                <div class="d-flex justify-content-center gap-3" data-swiper-parallax="-100">
+                    <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5 shadow-lg" style="border-radius: 50px;">Start Exploring</a>
                 </div>
             </div>
         </div>
     </div>
     
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" style="width: 5%;">
-        <div class="glass" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-            <i data-lucide="chevron-left" class="text-white"></i>
-        </div>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" style="width: 5%;">
-        <div class="glass" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-            <i data-lucide="chevron-right" class="text-white"></i>
-        </div>
-    </button>
+    <!-- Navigation Buttons -->
+    <div class="swiper-button-next text-white" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); width: 56px; height: 56px; border-radius: 50%; right: 20px;"></div>
+    <div class="swiper-button-prev text-white" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); width: 56px; height: 56px; border-radius: 50%; left: 20px;"></div>
+    <div class="swiper-pagination"></div>
 </div>
 
 <!-- Stats Section -->
 <div class="bg-white py-5" style="margin-top: -40px; position: relative; z-index: 10; border-radius: 40px 40px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.05);">
     <div class="container">
         <div class="row text-center g-4">
-            <div class="col-md-4 fade-up">
+            <div class="col-md-4 stat-number-wrapper" data-aos="fade-up">
                 <div class="p-4">
                     <div class="d-inline-flex align-items-center justify-content-center mb-3" style="width: 72px; height: 72px; background: rgba(0,180,216,0.1); border-radius: 20px; color: var(--teal);">
                         <i data-lucide="users" style="width: 32px; height: 32px;"></i>
@@ -68,7 +68,7 @@
                     <p class="text-muted fw-semibold">Active Members</p>
                 </div>
             </div>
-            <div class="col-md-4 fade-up" style="transition-delay: 100ms;">
+            <div class="col-md-4 stat-number-wrapper" data-aos="fade-up" data-aos-delay="100">
                 <div class="p-4">
                     <div class="d-inline-flex align-items-center justify-content-center mb-3" style="width: 72px; height: 72px; background: rgba(244,162,97,0.1); border-radius: 20px; color: var(--gold);">
                         <i data-lucide="library" style="width: 32px; height: 32px;"></i>
@@ -77,7 +77,7 @@
                     <p class="text-muted fw-semibold">Books Shared</p>
                 </div>
             </div>
-            <div class="col-md-4 fade-up" style="transition-delay: 200ms;">
+            <div class="col-md-4 stat-number-wrapper" data-aos="fade-up" data-aos-delay="200">
                 <div class="p-4">
                     <div class="d-inline-flex align-items-center justify-content-center mb-3" style="width: 72px; height: 72px; background: rgba(0,119,182,0.1); border-radius: 20px; color: var(--teal-dark);">
                         <i data-lucide="download-cloud" style="width: 32px; height: 32px;"></i>
@@ -93,7 +93,7 @@
 <!-- Categories Section -->
 <div class="py-5" style="background: var(--bg-color);">
     <div class="container py-4">
-        <div class="text-center mb-5 fade-up">
+        <div class="text-center mb-5" data-aos="fade-in">
             <h6 class="text-teal fw-bold text-uppercase tracking-wider">Explore</h6>
             <h2 class="display-6 fw-bold text-navy">Browse by Category</h2>
             <p class="text-muted mx-auto mt-3" style="max-width: 600px;">Find exactly what you're looking for, from high school board materials to advanced technical textbooks.</p>
@@ -101,7 +101,7 @@
 
         <div class="row g-4 justify-content-center">
             {% for i in data %}
-            <div class="col-xl-2 col-lg-3 col-md-4 col-6 fade-up">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="{% widthratio forloop.counter 1 50 %}">
                 <a href="{% url 'latestbooks' %}?id={{ i.cname }}" class="text-decoration-none">
                     <div class="bn-card text-center p-4 d-flex flex-column align-items-center justify-content-center h-100">
                         <div class="cat-icon-wrapper">
@@ -128,7 +128,7 @@
 <div class="py-5 bg-white">
     <div class="container py-5">
         <div class="row align-items-center g-5">
-            <div class="col-lg-6 fade-up">
+            <div class="col-lg-6" data-aos="fade-right">
                 <div class="position-relative">
                     <img src="{% static 'images/books21.jpg' %}" class="img-fluid rounded-4 shadow-lg" style="object-fit: cover; height: 500px; width: 100%;" alt="Reading">
                     <div class="position-absolute glass p-4 rounded-4 shadow-lg" style="bottom: -30px; right: -30px; max-width: 250px;">
@@ -142,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 px-lg-5 fade-up" style="transition-delay: 200ms;">
+            <div class="col-lg-6 px-lg-5" data-aos="fade-left" data-aos-delay="200">
                 <h6 class="text-teal fw-bold text-uppercase tracking-wider">How It Works</h6>
                 <h2 class="display-6 fw-bold text-navy mb-4">Simple, Fast & Free</h2>
                 
@@ -188,32 +188,57 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
                     // Trigger number counter
-                    if(entry.target.querySelector('.stat-number')) {
+                    if(entry.target.classList.contains('stat-number-wrapper')) {
                         const counter = entry.target.querySelector('.stat-number');
-                        const target = +counter.getAttribute('data-target');
-                        let count = 0;
-                        const updateCount = () => {
-                            const inc = target / 50;
-                            if (count < target) {
-                                count += inc;
-                                counter.innerText = Math.ceil(count).toLocaleString();
-                                setTimeout(updateCount, 40);
-                            } else {
-                                counter.innerText = target.toLocaleString() + "+";
-                            }
-                        };
-                        updateCount();
-                        counter.classList.remove('stat-number'); // run only once
+                        if (counter) {
+                            const target = +counter.getAttribute('data-target');
+                            let count = 0;
+                            const updateCount = () => {
+                                const inc = target / 50;
+                                if (count < target) {
+                                    count += inc;
+                                    counter.innerText = Math.ceil(count).toLocaleString();
+                                    setTimeout(updateCount, 40);
+                                } else {
+                                    counter.innerText = target.toLocaleString() + "+";
+                                }
+                            };
+                            updateCount();
+                            counter.classList.remove('stat-number'); // run only once
+                        }
                     }
                 }
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.fade-up').forEach((el) => {
+        document.querySelectorAll('.stat-number-wrapper').forEach((el) => {
             observer.observe(el);
+        });
+        
+        // Initialize Hero Swiper
+        const heroSwiper = new Swiper('.heroSwiper', {
+            speed: 1200,
+            parallax: true,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            effect: 'creative',
+            creativeEffect: {
+                prev: { shadow: true, translate: ['-20%', 0, -1] },
+                next: { translate: ['100%', 0, 0] },
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
     });
 </script>

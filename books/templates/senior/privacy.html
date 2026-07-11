@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="hero-wrapper" style="padding: var(--sp-6) 0; display: flex; align-items: center; text-align: center;">
+    <div class="hero-mesh"></div>
+    <div class="container hero-content">
+        <h1 class="display-4 fw-bold text-white mb-3" data-aos="fade-up">Privacy <span style="color: var(--teal-light);">Policy</span></h1>
+        <p class="lead text-white-50" data-aos="fade-up" data-aos-delay="100" style="max-width: 700px; margin: 0 auto;">Learn how we collect, use, and protect your data.</p>
+    </div>
+</div>
+
+<div class="container py-5" style="margin-top: -30px; position: relative; z-index: 10;">
+    <div class="bn-card p-5" data-aos="fade-up" style="border-radius: 24px;">
+        <h3 class="fw-bold text-navy mb-4">1. Information We Collect</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            We collect information you provide directly to us, such as when you create or modify your account, request services, or communicate with us. This includes your name, email, phone number, and address.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">2. How We Use Your Information</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            We use the information we collect to operate, maintain, and provide the features of the platform. We may also use this information to communicate with you, such as sending you updates and security alerts.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">3. Data Security</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            We take reasonable measures to help protect information about you from loss, theft, misuse, and unauthorized access. However, no security system is impenetrable, and we cannot guarantee the security of our systems 100%.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">4. Sharing Your Information</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            We do not share your personal information with third parties except as necessary to provide our services, comply with the law, or protect our rights.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">5. Contact Us</h3>
+        <p class="text-muted mb-0" style="line-height: 1.8;">
+            If you have any questions about this Privacy Policy, please contact us via our Contact page or at abhinav@gmail.com.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

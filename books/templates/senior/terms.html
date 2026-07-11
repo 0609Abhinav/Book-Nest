@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="hero-wrapper" style="padding: var(--sp-6) 0; display: flex; align-items: center; text-align: center;">
+    <div class="hero-mesh"></div>
+    <div class="container hero-content">
+        <h1 class="display-4 fw-bold text-white mb-3" data-aos="fade-up">Terms & <span style="color: var(--gold);">Conditions</span></h1>
+        <p class="lead text-white-50" data-aos="fade-up" data-aos-delay="100" style="max-width: 700px; margin: 0 auto;">Please read these terms carefully before using BookNest.</p>
+    </div>
+</div>
+
+<div class="container py-5" style="margin-top: -30px; position: relative; z-index: 10;">
+    <div class="bn-card p-5" data-aos="fade-up" style="border-radius: 24px;">
+        <h3 class="fw-bold text-navy mb-4">1. Acceptance of Terms</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            By accessing and using BookNest, you accept and agree to be bound by the terms and provision of this agreement.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">2. User Accounts</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            To use certain features of the platform, you must register for an account. You agree to provide accurate information and keep it updated. You are responsible for maintaining the confidentiality of your account password.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">3. Content and Books</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            BookNest acts as a platform for users to share and exchange books. We do not own the books listed on the platform. Users are responsible for ensuring they have the right to share the books they upload.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">4. Prohibited Conduct</h3>
+        <p class="text-muted mb-4" style="line-height: 1.8;">
+            You agree not to use the platform for any unlawful purpose, or to upload any content that is offensive, harmful, or violates the intellectual property rights of others.
+        </p>
+
+        <h3 class="fw-bold text-navy mb-4">5. Modifications</h3>
+        <p class="text-muted mb-0" style="line-height: 1.8;">
+            We reserve the right to modify these terms at any time. Your continued use of the platform constitutes your acceptance of the new terms.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

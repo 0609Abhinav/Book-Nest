@@ -31,6 +31,12 @@ def contactus(request):
 def about(request):
     return render(request, 'senior/aboutus.html')
 
+def terms(request):
+    return render(request, 'senior/terms.html')
+
+def privacy(request):
+    return render(request, 'senior/privacy.html')
+
 @rate_limit('signup', 5, 3600)
 def signu(request):
     if request.method == 'POST':
