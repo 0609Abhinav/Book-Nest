@@ -214,7 +214,6 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 📞 Contact
 
 - **Developer:** Abhinav Tripathi
-- **WhatsApp:** [+91-9621854341](https://wa.me/919621854341)
 - **YouTube:** [POLY UPDATE](https://youtube.com/c/POLYUPDATE)
 - **Instagram:** [@_abhinavtripathi](https://www.instagram.com/_abhinavtripathi/)
 - **Facebook:** [Abhinav Tripathi](https://www.facebook.com/profile.php?id=100014486285262)
