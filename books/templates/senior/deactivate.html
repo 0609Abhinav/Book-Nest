@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero" style="background: linear-gradient(135deg, #4a0000 0%, #1a0000 100%);">
+    <h1><i class="fa fa-exclamation-triangle text-danger"></i> Deactivate <span class="text-danger">Account</span></h1>
+    <p>Are you sure you want to leave BookNest?</p>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="bn-form-card text-center" style="border-top: 4px solid #ef233c;">
+                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:16px;">
+                    Danger Zone
+                </h4>
+                
+                <p class="text-muted mb-4">
+                    Deactivating your account will hide your profile and all your listed books from public view. This action cannot be easily undone.
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger w-100 mb-3" style="padding:12px;font-size:1rem;border-radius:10px;">
+                        <i class="fa fa-user-slash"></i> Yes, Deactivate My Account
+                    </button>
+                </form>
+                
+                <a href="{% url 'profile_edit' %}" class="btn btn-outline-secondary w-100" style="padding:12px;font-size:1rem;border-radius:10px;">
+                    No, Keep My Account
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

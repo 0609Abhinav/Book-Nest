@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+    <h1><i class="fa fa-user-edit"></i> Edit <span class="gold">Profile</span></h1>
+    <p>Update your personal information and preferences.</p>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="bn-form-card">
+                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:24px;">
+                    <i class="fa fa-sliders-h" style="color:var(--teal,#00b4d8);"></i> Profile Settings
+                </h4>
+                
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="post" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label>Full Name</label>
+                            <input type="text" name="name" value="{{ user_info.name }}" required class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Mobile Number</label>
+                            <input type="text" name="mobile" value="{{ user_info.mobile }}" required class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label>City</label>
+                            <input type="text" name="city" value="{{ user_info.city }}" required class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Update Profile Picture</label>
+                            <input type="file" name="pp" class="form-control" accept="image/*">
+                            <small class="text-muted">Leave blank to keep current photo.</small>
+                        </div>
+                        
+                        <div class="col-12 mt-4 d-flex gap-3">
+                            <button type="submit" class="btn-primary btn" style="flex:1;padding:12px;font-size:1rem;background:var(--teal,#00b4d8);border:none;border-radius:10px;">
+                                <i class="fa fa-save"></i> Save Changes
+                            </button>
+                            <a href="{% url 'myprofile' %}" class="btn btn-outline-secondary" style="flex:1;padding:12px;font-size:1rem;border-radius:10px;text-align:center;">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="my-4">
+                
+                <div class="text-center">
+                    <p class="text-muted mb-2">Want to leave BookNest?</p>
+                    <a href="{% url 'deactivate_account' %}" class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">
+                        <i class="fa fa-user-slash"></i> Deactivate Account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

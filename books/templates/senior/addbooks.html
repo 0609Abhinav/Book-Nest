@@ -2,77 +2,145 @@
 {% load static %}
 {% block content %}
 
-<div class="bn-page-hero">
-    <h1><i class="fa fa-plus-circle"></i> Add a <span class="gold">Book</span></h1>
-    <p>Share your book with thousands of readers on BookNest</p>
+<div class="hero-wrapper" style="padding: var(--sp-6) 0; min-height: 200px; display: flex; align-items: center; text-align: center;">
+    <div class="hero-mesh"></div>
+    <div class="container hero-content">
+        <h1 class="display-5 fw-bold text-white mb-2 fade-up visible">Share a <span style="color: var(--gold);">Book</span></h1>
+        <p class="lead text-white-50 fade-up visible" style="transition-delay: 100ms; max-width: 600px; margin: 0 auto;">List your book on BookNest and help fellow readers.</p>
+    </div>
 </div>
 
-<div class="container pb-5">
+<div class="container py-5" style="margin-top: -40px; position: relative; z-index: 10;">
     <div class="row g-4 justify-content-center">
         <!-- Form -->
-        <div class="col-lg-6 col-md-8">
-            <div class="bn-form-card">
-                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:24px;">
-                    <i class="fa fa-book" style="color:var(--teal,#00b4d8);"></i> Book Details
-                </h4>
+        <div class="col-lg-7 fade-up">
+            <div class="bn-form-card" style="border-radius: 24px; padding: var(--sp-6);">
+                <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+                    <div class="bg-primary text-white p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; background: var(--teal) !important;">
+                        <i data-lucide="book-plus" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold text-navy mb-0">Book Details</h4>
+                        <p class="text-muted small mb-0">Fill in the details carefully</p>
+                    </div>
+                </div>
+                
                 <form method="post" autocomplete="off" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <label>Book Title *</label>
-                    <input type="text" name="name" required class="form-control" placeholder="e.g. Physics Part I — Class 12"/>
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <label class="form-label text-muted fw-semibold small">Book Title <span class="text-danger">*</span></label>
+                            <input type="text" name="name" required class="form-control bg-light" placeholder="e.g. Physics Part I — Class 12"/>
+                        </div>
 
-                    <label>Author Name</label>
-                    <input type="text" name="aname" class="form-control" placeholder="e.g. H.C. Verma"/>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-semibold small">Author Name</label>
+                            <input type="text" name="aname" class="form-control bg-light" placeholder="e.g. H.C. Verma"/>
+                        </div>
 
-                    <label>Category *</label>
-                    <select name="category" class="form-control" required>
-                        <option value="">— Select Category —</option>
-                        {% for x in category %}
-                        <option value="{{ x.cname }}">{{ x.cname }}</option>
-                        {% endfor %}
-                    </select>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-semibold small">Category <span class="text-danger">*</span></label>
+                            <select name="category" class="form-select bg-light" required>
+                                <option value="">— Select Category —</option>
+                                {% for x in category %}
+                                <option value="{{ x.cname }}">{{ x.cname }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                    <label>Useful For *</label>
-                    <input type="text" name="useful" required class="form-control" placeholder="e.g. Class 12 Students, Engineers"/>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-semibold small">Useful For <span class="text-danger">*</span></label>
+                            <input type="text" name="useful" required class="form-control bg-light" placeholder="e.g. Class 12 Students"/>
+                        </div>
 
-                    <label>Price / Charge (₹) *</label>
-                    <input type="number" name="charge" required class="form-control" placeholder="Enter price in ₹ (0 for free)"/>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-semibold small">Price (₹) <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted">₹</span>
+                                <input type="number" name="charge" required class="form-control bg-light border-start-0" placeholder="0 for free"/>
+                            </div>
+                        </div>
 
-                    <label>Cover Picture *</label>
-                    <input type="file" name="cp" required class="form-control" accept="image/*"/>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-semibold small">Cover Picture <span class="text-danger">*</span></label>
+                            <input type="file" name="cp" required class="form-control bg-light" accept="image/*"/>
+                        </div>
 
-                    <label>Book File <span style="color:#aaa;font-weight:400;">(PDF / DOC / EPUB — optional)</span></label>
-                    <input type="file" name="bf" class="form-control" accept=".pdf,.doc,.docx,.epub"/>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-semibold small">Book File <span class="fw-normal">(PDF/DOC - Optional)</span></label>
+                            <input type="file" name="bf" class="form-control bg-light" accept=".pdf,.doc,.docx,.epub"/>
+                        </div>
 
-                    <label>Short Description *</label>
-                    <textarea class="form-control" name="short" style="min-height:100px;resize:vertical;" placeholder="Brief description of the book…" required></textarea>
+                        <div class="col-12">
+                            <label class="form-label text-muted fw-semibold small">Short Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control bg-light" name="short" style="min-height:120px;resize:vertical;" placeholder="Write a brief description of the condition and content..." required></textarea>
+                        </div>
 
-                    <div class="d-flex gap-3 mt-3">
-                        <button type="submit" class="btn-warning btn" style="flex:1;padding:12px;font-size:1rem;">
-                            <i class="fa fa-upload"></i> Submit Book
-                        </button>
-                        <a href="/senior/myprofile/" class="btn btn-outline-secondary" style="flex:1;padding:12px;font-size:1rem;border-radius:10px;text-align:center;">
-                            <i class="fa fa-arrow-left"></i> My Library
-                        </a>
+                        <div class="col-12 d-flex gap-3 mt-4">
+                            <button type="submit" class="btn btn-warning w-100 fw-bold" style="padding: 14px; border-radius: 12px;">
+                                <i data-lucide="upload" style="width: 20px; height: 20px; margin-right: 8px;"></i> Submit Book
+                            </button>
+                            <a href="{% url 'myprofile' %}" class="btn btn-outline-secondary w-100 fw-bold" style="padding: 14px; border-radius: 12px;">
+                                Cancel
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- Tips sidebar -->
-        <div class="col-lg-4 col-md-8">
-            <div class="bn-form-card" style="background:linear-gradient(160deg,var(--navy,#0d1b2a),#0a2540);color:#fff;">
-                <h5 style="color:var(--teal,#00b4d8);font-weight:700;"><i class="fa fa-lightbulb-o"></i> Tips for a Great Listing</h5>
-                <ul style="padding-left:18px;margin-top:14px;">
-                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Use a clear, high-resolution cover photo</li>
-                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Set a fair price to attract more readers</li>
-                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Upload a PDF/digital copy for free downloads</li>
-                    <li style="margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:0.88rem;">Write a detailed description including edition and condition</li>
-                    <li style="color:rgba(255,255,255,0.75);font-size:0.88rem;">Choose the correct category so readers find it easily</li>
+        <div class="col-lg-4 fade-up" style="transition-delay: 150ms;">
+            <div class="bn-form-card" style="background: linear-gradient(145deg, var(--navy), var(--navy2)); color: #fff; border-radius: 24px; padding: var(--sp-6); border: none;">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="bg-white text-navy p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i data-lucide="lightbulb" style="width: 20px; height: 20px; color: var(--gold);"></i>
+                    </div>
+                    <h5 class="fw-bold text-white mb-0">Tips for Success</h5>
+                </div>
+                
+                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                    <li class="d-flex gap-3">
+                        <i data-lucide="check-circle-2" class="text-teal-light flex-shrink-0" style="width: 20px; height: 20px; margin-top: 2px;"></i>
+                        <span style="color: rgba(255,255,255,0.85); font-size: 0.95rem;">Use a clear, bright cover photo to attract readers.</span>
+                    </li>
+                    <li class="d-flex gap-3">
+                        <i data-lucide="check-circle-2" class="text-teal-light flex-shrink-0" style="width: 20px; height: 20px; margin-top: 2px;"></i>
+                        <span style="color: rgba(255,255,255,0.85); font-size: 0.95rem;">Keep your price competitive or offer it for free.</span>
+                    </li>
+                    <li class="d-flex gap-3">
+                        <i data-lucide="check-circle-2" class="text-teal-light flex-shrink-0" style="width: 20px; height: 20px; margin-top: 2px;"></i>
+                        <span style="color: rgba(255,255,255,0.85); font-size: 0.95rem;">Upload a PDF version if available for instant downloads.</span>
+                    </li>
+                    <li class="d-flex gap-3">
+                        <i data-lucide="check-circle-2" class="text-teal-light flex-shrink-0" style="width: 20px; height: 20px; margin-top: 2px;"></i>
+                        <span style="color: rgba(255,255,255,0.85); font-size: 0.95rem;">Be honest about the book's physical condition in the description.</span>
+                    </li>
                 </ul>
-                <hr style="border-color:rgba(255,255,255,0.1);"/>
-                <img src="{% static 'images/books21.jpg' %}" class="img-fluid" style="border-radius:12px;margin-top:10px;" alt="books"/>
+                
+                <div class="mt-5" style="border-radius: 16px; overflow: hidden; border: 2px solid rgba(255,255,255,0.1);">
+                    <img src="{% static 'images/books21.jpg' %}" class="img-fluid" alt="books" style="opacity: 0.8; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8" />
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach((el) => {
+            observer.observe(el);
+        });
+    });
+</script>
+
 {% endblock %}

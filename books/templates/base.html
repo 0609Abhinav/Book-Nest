@@ -2,248 +2,158 @@
 {% load static %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BookNest — Your Book Exchange Hub</title>
-  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
-  <script src="{% static 'js/bootstrap.js' %}"></script>
-  <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet"/>
-  <link href="{% static 'css/global.css' %}" rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BookNest — Your Book Exchange Hub</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/global.css' %}" rel="stylesheet"/>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     HEADER — sticky 60px bar
-═══════════════════════════════════════════ -->
-<header class="bn-header">
-
-  <!-- Logo -->
-  <a href="/senior/home" class="bn-logo">
-    <div class="bn-logo-icon"><i class="fa fa-book"></i></div>
-    <div>
-      <div class="bn-logo-text">Book<span>Nest</span></div>
-      <div class="bn-logo-sub">Your Book Exchange Hub</div>
-    </div>
-  </a>
-
-  <!-- Ticker (hidden on tablet/mobile) -->
-  <div class="bn-ticker d-none d-lg-flex">
-    <span class="bn-ticker-dot"></span>
-    <marquee scrollamount="3">
-      📚 Discover, Share &amp; Download Books &nbsp;|&nbsp; India's Trusted Book Exchange &nbsp;|&nbsp; Free downloads available!
-    </marquee>
-  </div>
-
-  <!-- Right: social + user -->
-  <div class="bn-header-right">
-    <div class="bn-social-icons">
-      <a href="https://www.facebook.com/profile.php?id=100014486285262" target="_blank" title="Facebook" style="color:#4267B2"><i class="fa fa-facebook"></i></a>
-      <a href="https://youtube.com/c/POLYUPDATE" target="_blank" title="YouTube" style="color:#ff0000"><i class="fa fa-youtube-play"></i></a>
-      <a href="https://wa.me/919621854341" target="_blank" title="WhatsApp" style="color:#25d366"><i class="fa fa-whatsapp"></i></a>
-      <a href="https://www.instagram.com/_abhinavtripathi/" target="_blank" title="Instagram" style="color:#e1306c"><i class="fa fa-instagram"></i></a>
-    </div>
-    {% if request.session.user %}
-    <div class="bn-user-pill">
-      <i class="fa fa-user-circle"></i>
-      <span>{{ request.session.user }}</span>
-    </div>
-    {% endif %}
-  </div>
-
-</header>
-
-<!-- ═══════════════════════════════════════════
-     NAVBAR
-═══════════════════════════════════════════ -->
-<nav class="navbar navbar-expand-lg bn-navbar" id="bnNav">
-  <div class="container-fluid px-2">
-    <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#bnNavMenu"
-            aria-controls="bnNavMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="bnNavMenu">
-      <ul class="navbar-nav me-auto">
-
-        <li class="nav-item">
-          <a class="nav-link active" href="/senior/home">
-            <i class="fa fa-home"></i> Home
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/aboutus">
-            <i class="fa fa-info-circle"></i> About
-          </a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="catDrop"
-             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-th-list"></i> Categories
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="catDrop">
-            <li><a class="dropdown-item" href="/senior/latestbooks/?id=UP%20BOARD">
-              <i class="fa fa-flag"></i> UP Board</a></li>
-            <li><a class="dropdown-item" href="/senior/latestbooks/?id=CBSC%20Board">
-              <i class="fa fa-graduation-cap"></i> CBSE Board</a></li>
-            <li><a class="dropdown-item" href="/senior/latestbooks/?id=ICSC%20Board">
-              <i class="fa fa-graduation-cap"></i> ICSE Board</a></li>
-            <li><a class="dropdown-item" href="/senior/latestbooks/?id=NOVEL">
-              <i class="fa fa-book"></i> Novels</a></li>
-            <li><a class="dropdown-item" href="/senior/latestbooks/?id=Story%20Books">
-              <i class="fa fa-bookmark"></i> Story Books</a></li>
-            <li><a class="dropdown-item" href="/senior/latestbooks/?id=TECHNICAL">
-              <i class="fa fa-laptop"></i> Technical</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/latestbooks/">
-            <i class="fa fa-star"></i> Latest Books
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/contactus/">
-            <i class="fa fa-envelope"></i> Contact
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/addbooks/">
-            <i class="fa fa-plus-circle"></i> Add Books
-          </a>
-        </li>
-
-        {% if request.session.user is None %}
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/signup/">
-            <i class="fa fa-user-plus"></i> Sign Up
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/signin/">
-            <i class="fa fa-sign-in"></i> Sign In
-          </a>
-        </li>
-        {% endif %}
-
-        {% if request.session.user %}
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/myprofile/">
-            <i class="fa fa-folder-open"></i> My Books
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/senior/logout/" style="color:#ff6b6b !important;">
-            <i class="fa fa-sign-out"></i> Log Out
-          </a>
-        </li>
-        {% endif %}
-
-      </ul>
-
-      <!-- Search -->
-      <form class="bn-search-form" method="get" action="/senior/latestbooks/">
-        <input type="search" name="search" placeholder="Search books…"/>
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
-  </div>
-</nav>
-
-<!-- ═══════════════════════════════════════════
-     MAIN CONTENT
-═══════════════════════════════════════════ -->
-<main>{% block content %}{% endblock %}</main>
-
-<!-- ═══════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════ -->
-<footer class="bn-footer-upper">
-  <div class="container">
-    <div class="row g-4">
-
-      <!-- Brand -->
-      <div class="col-lg-4 col-md-6">
-        <div class="fn-brand-name">Book<span>Nest</span></div>
-        <div class="fn-tagline">Your Book Exchange Hub</div>
-        <p class="fn-desc">
-          India's community platform for pre-owned book exchange. Connecting students and readers across the country with affordable, quality books.
-        </p>
-        <div class="fn-social">
-          <a href="https://www.facebook.com/profile.php?id=100014486285262" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a>
-          <a href="https://youtube.com/c/POLYUPDATE" target="_blank" title="YouTube"><i class="fa fa-youtube-play" style="color:#ff4444"></i></a>
-          <a href="https://wa.me/919621854341" target="_blank" title="WhatsApp"><i class="fa fa-whatsapp" style="color:#25d366"></i></a>
-          <a href="https://www.instagram.com/_abhinavtripathi/" target="_blank" title="Instagram"><i class="fa fa-instagram" style="color:#e1306c"></i></a>
+    <!-- Fixed Header Container -->
+    <div class="fixed-top" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+        <!-- Top Bar -->
+        <div class="top-bar d-none d-lg-block" style="background: var(--navy); color: rgba(255,255,255,0.8); padding: 8px 0; font-size: 0.85rem;">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <i data-lucide="book" style="width:14px;height:14px;color:var(--gold);"></i>
+                    <span style="font-weight: 500; letter-spacing: 0.5px;">BookNest: Discover, Share & Download Books</span>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <div class="d-flex gap-3">
+                        <a href="https://facebook.com" target="_blank" style="color: rgba(255,255,255,0.8); transition: color 0.2s;"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+                        <a href="https://twitter.com" target="_blank" style="color: rgba(255,255,255,0.8); transition: color 0.2s;"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+                        <a href="https://instagram.com" target="_blank" style="color: rgba(255,255,255,0.8); transition: color 0.2s;"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+                    </div>
+                    {% if request.session.user %}
+                        <span class="badge" style="background: rgba(255,255,255,0.1); color: white; padding: 6px 12px; font-weight: 500;"><i data-lucide="user" style="width:12px;height:12px;margin-right:6px;"></i>{{ request.session.user }}</span>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- Quick links + Categories -->
-      <div class="col-lg-2 col-md-3 col-6">
-        <h5>Quick Links</h5>
-        <ul>
-          <li><a href="/senior/home">Home</a></li>
-          <li><a href="/senior/latestbooks/">Browse Books</a></li>
-          <li><a href="/senior/addbooks/">Add a Book</a></li>
-          <li><a href="/senior/aboutus">About Us</a></li>
-          <li><a href="/senior/contactus/">Contact</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-2 col-md-3 col-6">
-        <h5>Categories</h5>
-        <ul>
-          <li><a href="/senior/latestbooks/?id=UP%20BOARD">UP Board</a></li>
-          <li><a href="/senior/latestbooks/?id=CBSC%20Board">CBSE Board</a></li>
-          <li><a href="/senior/latestbooks/?id=ICSC%20Board">ICSE Board</a></li>
-          <li><a href="/senior/latestbooks/?id=NOVEL">Novels</a></li>
-          <li><a href="/senior/latestbooks/?id=TECHNICAL">Technical</a></li>
-          <li><a href="/senior/latestbooks/?id=Story%20Books">Story Books</a></li>
-        </ul>
-      </div>
+        <!-- Navbar (Glassmorphism) -->
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <div style="background:var(--teal);padding:8px;border-radius:10px;">
+                        <i data-lucide="book-open" style="color:white;width:24px;height:24px;"></i>
+                    </div>
+                    BookNest
+                </a>
+                
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <i data-lucide="menu" class="text-navy" style="width:28px;height:28px;"></i>
+                </button>
 
-      <!-- Contact -->
-      <div class="col-lg-4 col-md-6">
-        <h5>Get In Touch</h5>
-        <div class="fn-contact-row">
-          <div class="fn-contact-icon"><i class="fa fa-map-marker"></i></div>
-          <div class="fn-contact-text">Govt. Polytechnic Aurai Bhadohi,<br>Uttar Pradesh, India — 221401</div>
-        </div>
-        <div class="fn-contact-row">
-          <div class="fn-contact-icon" style="background:rgba(37,211,102,0.12);color:#25d366"><i class="fa fa-whatsapp"></i></div>
-          <div class="fn-contact-text">
-            <a href="https://wa.me/919621854341" target="_blank">+91-9621854341</a>
-            <div style="font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:1px">Tap to open WhatsApp</div>
-          </div>
-        </div>
-        <div class="fn-contact-row">
-          <div class="fn-contact-icon" style="background:rgba(244,161,29,0.12);color:var(--gold)"><i class="fa fa-envelope"></i></div>
-          <div class="fn-contact-text">abhinavt@booknest.in</div>
-        </div>
-        <div class="fn-contact-row">
-          <div class="fn-contact-icon"><i class="fa fa-clock-o"></i></div>
-          <div class="fn-contact-text">Mon–Sat: 9 AM – 6 PM</div>
-        </div>
-      </div>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-2">
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3 {% if request.path == '/' or 'home' in request.path %}active text-teal{% else %}text-navy{% endif %}" href="{% url 'home' %}" style="transition: all 0.3s;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3 {% if 'about' in request.path %}active text-teal{% else %}text-navy{% endif %}" href="{% url 'aboutus' %}" style="transition: all 0.3s;">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-semibold px-3 {% if 'categories' in request.path %}active text-teal{% else %}text-navy{% endif %}" href="#" data-bs-toggle="dropdown" style="transition: all 0.3s;">Categories</a>
+                            <ul class="dropdown-menu border-0 shadow-lg rounded-3 mt-2" style="background:rgba(255,255,255,0.95); backdrop-filter:blur(10px);">
+                                <li><a class="dropdown-item py-2 fw-semibold text-muted" href="{% url 'latestbooks' %}?id=UP%20BOARD">UP Board</a></li>
+                                <li><a class="dropdown-item py-2 fw-semibold text-muted" href="{% url 'latestbooks' %}?id=CBSC%20Board">CBSE Board</a></li>
+                                <li><a class="dropdown-item py-2 fw-semibold text-muted" href="{% url 'latestbooks' %}?id=ICSC%20Board">ICSE Board</a></li>
+                                <li><a class="dropdown-item py-2 fw-semibold text-muted" href="{% url 'latestbooks' %}?id=NOVEL">Novels</a></li>
+                                <li><a class="dropdown-item py-2 fw-semibold text-muted" href="{% url 'latestbooks' %}?id=TECHNICAL">Technical</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3 {% if 'latestbooks' in request.path %}active text-teal{% else %}text-navy{% endif %}" href="{% url 'latestbooks' %}" style="transition: all 0.3s;">Latest Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold px-3 {% if 'contactus' in request.path %}active text-teal{% else %}text-navy{% endif %}" href="{% url 'contactus' %}" style="transition: all 0.3s;">Contact</a>
+                        </li>
+                    </ul>
 
+                    <div class="d-flex gap-3 align-items-center mt-3 mt-lg-0">
+                        
+                        <form action="{% url 'latestbooks' %}" method="get" class="position-relative d-none d-lg-block me-2">
+                            <i data-lucide="search" class="position-absolute text-muted" style="left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px;"></i>
+                            <input type="text" name="q" class="form-control bg-light border-0" placeholder="Search books..." style="padding-left: 36px; border-radius: 20px; width: 220px; box-shadow: none;">
+                        </form>
+                        
+                        {% if request.session.user %}
+                            <a href="{% url 'addbooks' %}" class="btn btn-warning fw-bold px-3"><i data-lucide="upload" style="width:16px;height:16px;margin-right:4px;"></i> Add Book</a>
+                            <a href="{% url 'myprofile' %}" class="btn btn-primary px-3 fw-bold"><i data-lucide="layout-dashboard" style="width:16px;height:16px;margin-right:4px;"></i> Dashboard</a>
+                            <a href="{% url 'logout' %}" class="text-danger ms-2" title="Log Out"><i data-lucide="log-out" style="width:20px;height:20px;"></i></a>
+                        {% else %}
+                            <a href="{% url 'signin' %}" class="btn btn-primary px-4 fw-bold">Sign In</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <hr class="fn-divider"/>
-  </div>
-</footer>
 
-<div class="bn-footer-lower">
-  <div class="container">
-    <span>&copy; 2024 <strong>BookNest</strong> — All Rights Reserved</span>
-    <span>Developed by <em>Abhinav Tripathi</em></span>
-    <a href="#">Privacy &amp; Policy</a>
-  </div>
-</div>
+    <!-- Main Content -->
+    <main style="padding-top: 130px; min-height: 70vh;">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-<!-- WhatsApp floating button -->
-<a href="https://wa.me/919621854341" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
-  <i class="fa fa-whatsapp"></i>
-</a>
+    <!-- Footer -->
+    <footer style="background: var(--navy); color: #fff; padding: var(--sp-12) 0 var(--sp-6) 0; margin-top: var(--sp-12);">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <a class="navbar-brand text-white d-flex align-items-center gap-2 mb-4" href="{% url 'home' %}" style="font-size: 1.5rem; font-weight:800;">
+                        <div style="background:var(--teal);padding:8px;border-radius:10px;">
+                            <i data-lucide="book-open" style="color:white;width:24px;height:24px;"></i>
+                        </div>
+                        BookNest
+                    </a>
+                    <p class="text-white-50" style="font-size: 0.95rem;">Empowering students and readers by providing a modern platform to share and discover books.</p>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4" style="font-size:1.1rem;">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="{% url 'home' %}" class="text-white-50 text-decoration-none hover-white">Home</a></li>
+                        <li><a href="{% url 'aboutus' %}" class="text-white-50 text-decoration-none hover-white">About Us</a></li>
+                        <li><a href="{% url 'latestbooks' %}" class="text-white-50 text-decoration-none hover-white">Browse Books</a></li>
+                        <li><a href="{% url 'contactus' %}" class="text-white-50 text-decoration-none hover-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4" style="font-size:1.1rem;">Legal</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none hover-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4" style="font-size:1.1rem;">Newsletter</h5>
+                    <p class="text-white-50 small">Subscribe to get the latest book updates directly to your inbox.</p>
+                    <form class="d-flex gap-2">
+                        <input type="email" class="form-control" placeholder="Email address" style="background:rgba(255,255,255,0.1); border:none; color:white;">
+                        <button class="btn btn-primary px-3"><i data-lucide="send" style="width:18px;height:18px;"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <p class="text-white-50 small mb-0">&copy; {% now "Y" %} BookNest. All rights reserved. Developed by Abhinav Tripathi.</p>
+            </div>
+        </div>
+    </footer>
 
+    <style>
+        .hover-white:hover { color: #fff !important; }
+    </style>
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero">
+    <h1><i class="fa fa-envelope-open-text"></i> Verify <span class="gold">Email</span></h1>
+    <p>Please enter the 6-digit code sent to your email.</p>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="bn-form-card">
+                <h4 style="font-weight:800;color:var(--navy,#0d1b2a);margin-bottom:24px;text-align:center;">
+                    <i class="fa fa-lock" style="color:var(--teal,#00b4d8);"></i> Enter OTP
+                </h4>
+                
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <p class="text-center text-muted mb-4">Code sent to: <strong>{{ email }}</strong></p>
+
+                <form method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label>6-Digit OTP *</label>
+                        <input type="text" name="otp" required class="form-control text-center" placeholder="XXXXXX" maxlength="6" style="font-size: 1.5rem; letter-spacing: 0.25rem;">
+                    </div>
+                    
+                    <button type="submit" class="btn-warning btn w-100" style="padding:12px;font-size:1rem;">
+                        <i class="fa fa-check-circle"></i> Verify My Email
+                    </button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'signup' %}" class="text-muted text-decoration-none">← Back to Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

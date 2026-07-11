@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bn-page-hero" style="padding-bottom: 2rem;">
+    <h1>{{ book.title }}</h1>
+    <p class="mb-0">
+        <span class="badge bg-light text-dark me-2">{{ book.bookcategory }}</span>
+        <span class="badge bg-warning text-dark"><i class="fa fa-tag"></i> ₹{{ book.charge }}</span>
+    </p>
+</div>
+
+<div class="container pb-5" style="margin-top: -30px; position: relative; z-index: 10;">
+    <div class="row g-4">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <div class="bn-form-card h-100" style="padding: 2rem;">
+                <div class="row">
+                    <div class="col-md-5 mb-4 mb-md-0">
+                        {% if book.coverpic %}
+                        <img src="/{{ book.coverpic }}" class="img-fluid rounded shadow-sm" alt="{{ book.title }}" style="width: 100%; object-fit: cover; aspect-ratio: 3/4;">
+                        {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center rounded shadow-sm" style="width: 100%; aspect-ratio: 3/4;">
+                            <i class="fa fa-book fa-4x text-muted"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="mb-3" style="font-weight: 700; color: var(--navy);">Description</h3>
+                        <p class="text-muted" style="line-height: 1.8;">{{ book.description }}</p>
+                        
+                        <h5 class="mt-4 mb-2" style="font-weight: 600; color: var(--navy);">Useful For</h5>
+                        <p class="text-muted"><i class="fa fa-check-circle text-success me-2"></i>{{ book.useful }}</p>
+
+                        <div class="d-flex gap-2 mt-4">
+                            {% if book.bookfile %}
+                            <a href="/{{ book.bookfile }}" class="btn btn-primary" download style="flex: 1; padding: 12px; background: var(--teal); border: none; border-radius: 10px;">
+                                <i class="fa fa-download me-2"></i> Download PDF
+                            </a>
+                            {% endif %}
+                            
+                            <button class="btn btn-outline-danger" style="padding: 12px; border-radius: 10px; width: 60px;" title="{% if in_wishlist %}Remove from Wishlist{% else %}Add to Wishlist{% endif %}">
+                                <i class="fa {% if in_wishlist %}fa-heart{% else %}fa-heart-o{% endif %}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="bn-form-card sticky-top" style="top: 80px;">
+                <h5 class="mb-3" style="font-weight: 700; color: var(--navy);">About the Seller</h5>
+                <div class="d-flex align-items-center mb-4">
+                    {% if seller.ppic %}
+                    <img src="/{{ seller.ppic }}" class="rounded-circle me-3" width="60" height="60" style="object-fit: cover;">
+                    {% else %}
+                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-user fa-2x text-muted"></i>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <h6 class="mb-0" style="font-weight: 600;">{{ seller.name }}</h6>
+                        <small class="text-muted"><i class="fa fa-map-marker-alt me-1"></i> {{ seller.city }}</small>
+                    </div>
+                </div>
+
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Profession</span>
+                        <span class="fw-semibold">{{ seller.profession }}</span>
+                    </li>
+                    <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Member Since</span>
+                        <span class="fw-semibold">{{ seller.regdate|date:"M Y" }}</span>
+                    </li>
+                </ul>
+
+                <button class="btn btn-warning w-100 mb-2" style="border-radius: 10px;">
+                    <i class="fab fa-whatsapp me-2"></i> Contact Seller
+                </button>
+                <button class="btn btn-outline-secondary w-100" style="border-radius: 10px;">
+                    <i class="fa fa-flag me-2"></i> Report Book
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Books -->
+    {% if related_books %}
+    <div class="mt-5">
+        <h4 class="mb-4" style="font-weight: 700; color: var(--navy);">Related Books</h4>
+        <div class="row g-4">
+            {% for rb in related_books %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="{% url 'book_detail' rb.id %}" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm border-0 bn-book-card" style="border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        {% if rb.coverpic %}
+                        <img src="/{{ rb.coverpic }}" class="card-img-top" alt="{{ rb.title }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h6 class="card-title text-dark mb-1 fw-bold text-truncate">{{ rb.title }}</h6>
+                            <p class="text-muted small mb-0">₹{{ rb.charge }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .bn-book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+</style>
+
+{% endblock %}
