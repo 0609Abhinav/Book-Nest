@@ -47,5 +47,13 @@ def run_setup():
         user.save()
         print(f"✅ Demo user updated! Email: {email} | Password: {password}")
 
+    # 3. Auto-approve any pending books
+    from senior.models import addbooks
+    pending_books = addbooks.objects.filter(status='pending')
+    count = pending_books.count()
+    if count > 0:
+        pending_books.update(status='approved')
+        print(f"✅ Auto-approved {count} pending books.")
+
 if __name__ == '__main__':
     run_setup()

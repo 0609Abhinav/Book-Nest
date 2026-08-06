@@ -190,9 +190,9 @@ def addbuk(request):
         addbooks.objects.create(
             authorid=authotid, bookcategory=bookcategory, title=title, 
             description=description, useful=useful, coverpic=coverpic, 
-            charge=charge, bookfile=bookfile, status='pending'
+            charge=charge, bookfile=bookfile, status='approved'
         )
-        messages.success(request, "Book added! It is currently pending review.")
+        messages.success(request, "Book added successfully!")
         return redirect('myprofile')
 
     return render(request, 'senior/addbooks.html', {"category": cdata})
