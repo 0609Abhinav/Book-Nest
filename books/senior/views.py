@@ -12,7 +12,7 @@ def home(request):
     cdata = category.objects.all().order_by('-id')
     citydata = city.objects.all()
     newdata = new.objects.all()
-    featured_books = addbooks.objects.filter(status='approved').order_by('-created_at')[:10]
+    featured_books = addbooks.objects.all().order_by('-created_at')[:10]
     return render(request, 'senior/index.html', {
         "data": cdata, 
         "citydata": citydata, 
