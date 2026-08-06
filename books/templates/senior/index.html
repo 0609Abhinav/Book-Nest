@@ -3,16 +3,13 @@
 {% block content %}
 
 <!-- Hero Section -->
-<div class="swiper heroSwiper" style="height: 600px; width: 100%; position: relative;">
+<div class="swiper heroSwiper" id="vanta-bg" style="height: 600px; width: 100%; position: relative;">
     <div class="swiper-wrapper">
         <!-- Slide 1 -->
-        <div class="swiper-slide position-relative overflow-hidden">
-            <div class="swiper-zoom-container">
-                <img src="{% static 'images/hero1.png' %}" class="w-100 h-100" style="object-fit: cover; filter: brightness(0.5);" alt="Hero 1">
-            </div>
+        <div class="swiper-slide position-relative overflow-hidden" style="background: transparent;">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
-                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300">Discover. Share. <span style="color: var(--teal-light);">Read.</span></h1>
-                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto;">Join India's fastest growing community of readers. Exchange academic books, novels, and more.</p>
+                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">Discover. Share. <span style="color: var(--teal-light);">Read.</span></h1>
+                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Join India's fastest growing community of readers. Exchange academic books, novels, and more.</p>
                 <div class="d-flex justify-content-center gap-3" data-swiper-parallax="-100">
                     <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5 shadow-lg" style="border-radius: 50px;">Browse Library</a>
                     <a href="{% url 'addbooks' %}" class="btn btn-outline-light btn-lg px-5" style="border-radius: 50px; border-width: 2px;">Share a Book</a>
@@ -21,13 +18,10 @@
         </div>
         
         <!-- Slide 2 -->
-        <div class="swiper-slide position-relative overflow-hidden">
-            <div class="swiper-zoom-container">
-                <img src="{% static 'images/hero2.png' %}" class="w-100 h-100" style="object-fit: cover; filter: brightness(0.5);" alt="Hero 2">
-            </div>
+        <div class="swiper-slide position-relative overflow-hidden" style="background: transparent;">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
-                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300">Your Digital <span style="color: var(--gold);">Library</span></h1>
-                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto;">Access thousands of technical resources, board materials, and stories contributed by seniors.</p>
+                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">Your Digital <span style="color: var(--gold);">Library</span></h1>
+                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Access thousands of technical resources, board materials, and stories contributed by seniors.</p>
                 <div class="d-flex justify-content-center gap-3" data-swiper-parallax="-100">
                     <a href="{% url 'signup' %}" class="btn btn-warning btn-lg px-5 text-navy fw-bold shadow-lg" style="border-radius: 50px;">Join the Community</a>
                 </div>
@@ -35,13 +29,10 @@
         </div>
 
         <!-- Slide 3 -->
-        <div class="swiper-slide position-relative overflow-hidden">
-            <div class="swiper-zoom-container">
-                <img src="{% static 'images/hero3.png' %}" class="w-100 h-100" style="object-fit: cover; filter: brightness(0.5);" alt="Hero 3">
-            </div>
+        <div class="swiper-slide position-relative overflow-hidden" style="background: transparent;">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
-                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300">Smart <span style="color: var(--teal-light);">Exchange</span></h1>
-                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto;">List the books you don't need, find the ones you do. Sustainable reading for everyone.</p>
+                <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">Smart <span style="color: var(--teal-light);">Exchange</span></h1>
+                <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">List the books you don't need, find the ones you do. Sustainable reading for everyone.</p>
                 <div class="d-flex justify-content-center gap-3" data-swiper-parallax="-100">
                     <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5 shadow-lg" style="border-radius: 50px;">Start Exploring</a>
                 </div>
@@ -58,8 +49,8 @@
 </div>
 
 <!-- Stats Section -->
-<div class="bg-white py-5" style="margin-top: -40px; position: relative; z-index: 10; border-radius: 40px 40px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.1);">
-    <div class="container">
+<div class="container" style="margin-top: -60px; position: relative; z-index: 10; margin-bottom: 40px;">
+    <div class="bg-white py-5 shadow-lg" style="border-radius: 40px; border: 1px solid rgba(0,180,216,0.1);">
         <div class="row text-center g-4">
             <div class="col-md-4 stat-number-wrapper" data-aos="fade-up">
                 <div class="p-4">
@@ -295,6 +286,26 @@
                 prevEl: '.swiper-button-prev',
             },
         });
+        
+        // Initialize Vanta.js 3D Background
+        if (window.VANTA) {
+            VANTA.NET({
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x00b4d8,
+                backgroundColor: 0x0d1b2a,
+                points: 15.00,
+                maxDistance: 22.00,
+                spacing: 18.00,
+                showDots: true
+            });
+        }
     });
 </script>
 

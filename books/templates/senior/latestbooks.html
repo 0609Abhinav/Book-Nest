@@ -85,14 +85,18 @@
                         
                         <!-- Book Cover Image -->
                         <a href="{% url 'book_detail' item.book.id %}" class="text-decoration-none">
-                            <div class="position-relative bg-light">
-                                {% if item.book.coverpic %}
-                                <img src="/{{ item.book.coverpic }}" class="book-cover skeleton" alt="{{ item.book.title }}">
-                                {% else %}
-                                <div class="book-cover d-flex align-items-center justify-content-center text-muted">
-                                    <i data-lucide="book-text" style="width:48px;height:48px;opacity:0.3;"></i>
+                            <div class="position-relative bg-light" style="flex-shrink: 0; padding: 20px;">
+                                <div class="book-3d-wrapper">
+                                    <div class="book-3d">
+                                        {% if item.book.coverpic %}
+                                        <img src="/{{ item.book.coverpic }}" class="skeleton w-100 h-100" alt="{{ item.book.title }}" style="object-fit: cover;">
+                                        {% else %}
+                                        <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted bg-white border">
+                                            <i data-lucide="book-text" style="width:48px;height:48px;opacity:0.3;"></i>
+                                        </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                                {% endif %}
                             </div>
                         </a>
 
