@@ -103,19 +103,72 @@
             {% for i in data %}
             <div class="col-xl-2 col-lg-3 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="{% widthratio forloop.counter 1 50 %}">
                 <a href="{% url 'latestbooks' %}?id={{ i.cname }}" class="text-decoration-none">
-                    <div class="bn-card text-center p-4 d-flex flex-column align-items-center justify-content-center h-100">
-                        <div class="cat-icon-wrapper">
-                            {% if "BOARD" in i.cname|upper %}
-                                <i data-lucide="graduation-cap" style="width:32px;height:32px;"></i>
-                            {% elif "NOVEL" in i.cname|upper or "STORY" in i.cname|upper %}
-                                <i data-lucide="book-open" style="width:32px;height:32px;"></i>
-                            {% elif "TECH" in i.cname|upper %}
-                                <i data-lucide="monitor" style="width:32px;height:32px;"></i>
-                            {% else %}
-                                <i data-lucide="bookmark" style="width:32px;height:32px;"></i>
-                            {% endif %}
+                    <div class="cat-card text-center p-4 d-flex flex-column align-items-center justify-content-center h-100">
+                        <!-- Professional SVG icon per category -->
+                        <div class="cat-icon-wrap">
+                          {% if i.cname == "UP BOARD" or i.cname == "UP Board" %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <rect x="8" y="6" width="32" height="36" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M16 6V42" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+                            <rect x="20" y="12" width="14" height="3" rx="1.5" fill="currentColor" opacity="0.7"/>
+                            <rect x="20" y="18" width="10" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+                            <rect x="20" y="23" width="12" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+                            <rect x="20" y="28" width="8" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+                            <circle cx="13" cy="35" r="2.5" fill="currentColor" opacity="0.5"/>
+                          </svg>
+                          {% elif i.cname == "CBSC Board" or i.cname == "CBSE Board" or i.cname == "CBSE" %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <path d="M24 8L6 18L24 28L42 18L24 8Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M12 22V34L24 40L36 34V22" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <line x1="24" y1="28" x2="24" y2="40" stroke="currentColor" stroke-width="2.5"/>
+                          </svg>
+                          {% elif i.cname == "ICSC Board" or i.cname == "ICSE Board" or i.cname == "ICSE" %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <rect x="6" y="10" width="16" height="28" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <rect x="26" y="10" width="16" height="28" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M14 18H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M14 24H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M30 18H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M30 24H34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+                          {% elif i.cname == "NOVEL" or i.cname == "Novels" %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <path d="M8 8C8 8 14 6 24 10C34 6 40 8 40 8V38C40 38 34 36 24 40C14 36 8 38 8 38V8Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M24 10V40" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+                            <path d="M12 16H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                            <path d="M12 22H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                          </svg>
+                          {% elif i.cname == "Story Books" %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <rect x="10" y="6" width="28" height="36" rx="4" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M18 6V42" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                            <circle cx="28" cy="18" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M24 30C24 30 26 26 28 26C30 26 32 30 32 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+                          {% elif i.cname == "TECHNICAL" or i.cname == "Technical" %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <rect x="6" y="10" width="36" height="24" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M18 38H30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M24 34V38" stroke="currentColor" stroke-width="2.5"/>
+                            <path d="M16 20L12 24L16 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                            <path d="M32 20L36 24L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                            <path d="M26 17L22 31" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                          </svg>
+                          {% else %}
+                          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="cat-svg">
+                            <path d="M10 8H34L38 12V40H10V8Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                            <path d="M34 8V12H38" stroke="currentColor" stroke-width="2"/>
+                            <rect x="16" y="18" width="16" height="2" rx="1" fill="currentColor" opacity="0.5"/>
+                            <rect x="16" y="24" width="12" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+                            <rect x="16" y="30" width="14" height="2" rx="1" fill="currentColor" opacity="0.3"/>
+                          </svg>
+                          {% endif %}
                         </div>
-                        <h6 class="fw-bold text-dark mb-0">{{ i.cname }}</h6>
+                        <h6 class="fw-bold text-dark mb-3">{{ i.cname }}</h6>
+                        <span class="cat-btn">
+                          <span>Explore</span>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
                     </div>
                 </a>
             </div>

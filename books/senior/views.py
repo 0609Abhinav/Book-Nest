@@ -433,7 +433,7 @@ def book_detail(request, book_id):
     try:
         book = addbooks.objects.get(id=book_id, status='approved')
         seller = reg.objects.filter(email=book.authorid).first()
-        related_books = addbooks.objects.filter(bookcat=book.bookcat, status='approved').exclude(id=book_id)[:4]
+        related_books = addbooks.objects.filter(bookcategory=book.bookcategory, status='approved').exclude(id=book_id)[:4]
         return render(request, 'senior/book_detail.html', {'book': book, 'seller': seller, 'related_books': related_books})
     except addbooks.DoesNotExist:
         messages.error(request, "Book not found or pending review.")

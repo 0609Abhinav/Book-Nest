@@ -36,18 +36,24 @@
                     <label class="form-label text-muted small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Categories</label>
                     <div class="d-flex flex-column gap-1">
                         <a href="{% url 'latestbooks' %}" class="cat-link {% if not current_cat %}active{% endif %}">
-                            <i data-lucide="grid" class="me-2" style="width:18px;height:18px;"></i> All Books
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> All Books
                         </a>
                         {% for i in data %}
                         <a href="{% url 'latestbooks' %}?id={{ i.cname }}&sort={{ current_sort }}" class="cat-link {% if current_cat == i.cname %}active{% endif %}">
-                            {% if "BOARD" in i.cname|upper %}
-                                <i data-lucide="graduation-cap" class="me-2" style="width:18px;height:18px;"></i>
-                            {% elif "NOVEL" in i.cname|upper or "STORY" in i.cname|upper %}
-                                <i data-lucide="book-open" class="me-2" style="width:18px;height:18px;"></i>
-                            {% elif "TECH" in i.cname|upper %}
-                                <i data-lucide="monitor" class="me-2" style="width:18px;height:18px;"></i>
+                            {% if i.cname == "UP BOARD" or i.cname == "UP Board" %}
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><rect x="8" y="6" width="32" height="36" rx="3" fill="none"/><path d="M16 6V42" opacity="0.4"/></svg>
+                            {% elif i.cname == "CBSC Board" or i.cname == "CBSE Board" %}
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><path d="M24 8L6 18L24 28L42 18L24 8Z" fill="none"/><path d="M12 22V34L24 40L36 34V22" fill="none"/></svg>
+                            {% elif i.cname == "ICSC Board" or i.cname == "ICSE Board" %}
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><rect x="6" y="10" width="16" height="28" rx="2" fill="none"/><rect x="26" y="10" width="16" height="28" rx="2" fill="none"/></svg>
+                            {% elif i.cname == "NOVEL" or i.cname == "Novels" %}
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><path d="M8 8C8 8 14 6 24 10C34 6 40 8 40 8V38C40 38 34 36 24 40C14 36 8 38 8 38V8Z" fill="none"/><path d="M24 10V40" opacity="0.4"/></svg>
+                            {% elif i.cname == "Story Books" %}
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><rect x="10" y="6" width="28" height="36" rx="4" fill="none"/><path d="M18 6V42" opacity="0.3"/></svg>
+                            {% elif i.cname == "TECHNICAL" or i.cname == "Technical" %}
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><rect x="6" y="10" width="36" height="24" rx="3" fill="none"/><path d="M18 38H30" stroke-linecap="round"/><path d="M24 34V38"/></svg>
                             {% else %}
-                                <i data-lucide="bookmark" class="me-2" style="width:18px;height:18px;"></i>
+                            <svg width="18" height="18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" class="me-2"><path d="M10 8H34L38 12V40H10V8Z" fill="none"/><path d="M34 8V12H38"/></svg>
                             {% endif %}
                             {{ i.cname }}
                         </a>
