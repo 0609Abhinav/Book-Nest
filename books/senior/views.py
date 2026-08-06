@@ -120,6 +120,7 @@ def sign(request):
                 return redirect('verify_email')
             elif check_password(Passwd, user.passwd):
                 request.session["user"] = Email
+                request.session.set_expiry(1209600) # 2 weeks login persistence
                 messages.success(request, "Login successful!")
                 return redirect('home')
             else:
@@ -211,7 +212,21 @@ def profile(request):
     user_email = request.session.get('user')
     bookdata = addbooks.objects.filter(authorid=user_email)
     user_info = reg.objects.get(email=user_email)
-    return render(request, 'senior/myprofile.html', {"bookdata": bookdata, "user_info": user_info})
+    
+    wishlist_records = Wishlist.objects.filter(user_email=user_email)
+    wishlist_books = []
+    for w in wishlist_records:
+        try:
+            book = addbooks.objects.get(id=w.book_id)
+            wishlist_books.append(book)
+        except addbooks.DoesNotExist:
+            continue
+
+    return render(request, 'senior/myprofile.html', {
+        "bookdata": bookdata, 
+        "user_info": user_info,
+        "wishlist_books": wishlist_books
+    })
 
 @login_required_custom
 def profile_edit(request):
@@ -265,10 +280,18 @@ def latest(request):
     cdata = category.objects.all().order_by('-id')
     cat_id = request.GET.get('id')
     sort_by = request.GET.get('sort', '-created_at')
+    search_query = request.GET.get('q')
     
     books_query = addbooks.objects.filter(status='approved')
     if cat_id:
         books_query = books_query.filter(bookcategory=cat_id)
+        
+    if search_query:
+        from django.db.models import Q
+        books_query = books_query.filter(
+            Q(title__icontains=search_query) | 
+            Q(description__icontains=search_query)
+        )
         
     if sort_by == 'price_asc':
         books_query = books_query.order_by('charge')
@@ -450,4 +473,13 @@ def toggle_wishlist(request, book_id):
         else:
             Wishlist.objects.create(user_email=user_email, book_id=book_id)
             messages.success(request, "Added to wishlist.")
+    return redirect('book_detail', book_id=book_id)
+
+@login_required_custom
+def report_book(request, book_id):
+    if request.method == 'POST':
+        reason = request.POST.get('reason', 'Inappropriate content')
+        user_email = request.session.get('user')
+        BookReport.objects.create(book_id=book_id, reporter_email=user_email, reason=reason)
+        messages.success(request, "Thank you. This book has been reported to the admins.")
     return redirect('book_detail', book_id=book_id)

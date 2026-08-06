@@ -136,8 +136,15 @@ CSRF_COOKIE_HTTPONLY = True
 LOGIN_URL = '/senior/signin/'
 LOGIN_REDIRECT_URL = '/senior/home/'
 
-# Email Backend (Console for dev)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Email Backend (SMTP configuration for real emails)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'abhinavtripathi6sep@gmail.com'
+# To make emails work, set this to your Google App Password. 
+# For now, it's left blank so you can securely add it later.
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 
 # File Upload Limits (5MB)
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880

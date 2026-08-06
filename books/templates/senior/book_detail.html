@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-5 mb-4 mb-md-0">
                         {% if book.coverpic %}
-                        <img src="/{{ book.coverpic }}" class="img-fluid rounded shadow-sm" alt="{{ book.title }}" style="width: 100%; object-fit: cover; aspect-ratio: 3/4;">
+                        <img src="/{{ book.coverpic }}" class="img-fluid rounded shadow-sm skeleton" alt="{{ book.title }}" style="width: 100%; object-fit: cover; aspect-ratio: 3/4;">
                         {% else %}
                         <div class="bg-light d-flex align-items-center justify-content-center rounded shadow-sm" style="width: 100%; aspect-ratio: 3/4;">
                             <i class="fa fa-book fa-4x text-muted"></i>
@@ -80,12 +80,40 @@
                     </li>
                 </ul>
 
-                <button class="btn btn-warning w-100 mb-2" style="border-radius: 10px;">
-                    <i class="fab fa-whatsapp me-2"></i> Contact Seller
-                </button>
-                <button class="btn btn-outline-secondary w-100" style="border-radius: 10px;">
+                <a href="mailto:{{ seller.email }}" class="btn btn-warning w-100 mb-2" style="border-radius: 10px;">
+                    <i class="fa fa-envelope me-2"></i> Contact Seller
+                </a>
+                <button type="button" class="btn btn-outline-secondary w-100" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#reportModal">
                     <i class="fa fa-flag me-2"></i> Report Book
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-radius: 16px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <form method="POST" action="{% url 'report_book' book.id %}">
+                    {% csrf_token %}
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="modal-title fw-bold text-navy">Report Book</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body py-4">
+                        <p class="text-muted small mb-3">Please tell us why you are reporting "{{ book.title }}".</p>
+                        <select name="reason" class="form-select" style="border-radius: 10px; padding: 12px; background: var(--bg-color); border: 1px solid var(--border);">
+                            <option value="Inappropriate content">Inappropriate content</option>
+                            <option value="Fake or scam">Fake or scam</option>
+                            <option value="Spam">Spam</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer border-0 pt-0">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius: 10px;">Cancel</button>
+                        <button type="submit" class="btn btn-danger" style="border-radius: 10px;">Submit Report</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

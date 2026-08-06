@@ -77,7 +77,7 @@
             <div class="row g-4">
                 {% for item in bdetail %}
                 <div class="col-lg-4 col-sm-6 fade-up">
-                    <div class="bn-card d-flex flex-column position-relative">
+                    <div class="bn-card d-flex flex-column position-relative" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-max="5" data-tilt-speed="400">
                         <!-- Category Badge -->
                         <span class="badge bg-dark position-absolute" style="top: 12px; left: 12px; z-index: 2;">
                             {{ item.book.bookcategory }}
@@ -87,7 +87,7 @@
                         <a href="{% url 'book_detail' item.book.id %}" class="text-decoration-none">
                             <div class="position-relative bg-light">
                                 {% if item.book.coverpic %}
-                                <img src="/{{ item.book.coverpic }}" class="book-cover" alt="{{ item.book.title }}">
+                                <img src="/{{ item.book.coverpic }}" class="book-cover skeleton" alt="{{ item.book.title }}">
                                 {% else %}
                                 <div class="book-cover d-flex align-items-center justify-content-center text-muted">
                                     <i data-lucide="book-text" style="width:48px;height:48px;opacity:0.3;"></i>

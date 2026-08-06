@@ -1,0 +1,33 @@
+/* 3D Shadows & Hover Effects */
+.bn-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+.bn-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 10px 20px rgba(0,180,216,0.1) !important;
+}
+
+[data-theme="dark"] .bn-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 10px 20px rgba(0,180,216,0.15) !important;
+}
+
+/* Skeleton Loading Animation */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-color) 25%, var(--border) 50%, var(--bg-color) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: 8px;
+    min-height: 200px; /* Default height for book covers */
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Hide actual image until loaded if skeleton is active */
+img.skeleton {
+    color: transparent;
+}

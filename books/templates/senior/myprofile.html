@@ -27,121 +27,188 @@
         </a>
     </div>
 
-    {% if bookdata %}
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-pills mb-4 gap-2 fade-up visible" id="profileTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active rounded-pill px-4 fw-bold" id="uploads-tab" data-bs-toggle="pill" data-bs-target="#uploads" type="button" role="tab" style="transition: all 0.3s;">My Uploads</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-pill px-4 fw-bold" id="wishlist-tab" data-bs-toggle="pill" data-bs-target="#wishlist" type="button" role="tab" style="transition: all 0.3s;">My Wishlist</button>
+        </li>
+    </ul>
 
-    <!-- Desktop Table -->
-    <div class="d-none d-md-block fade-up visible" style="transition-delay: 100ms;">
-        <div class="bn-card" style="border-radius: 16px; overflow: hidden;">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0" style="background: transparent;">
-                    <thead style="background: var(--bg-color);">
-                        <tr>
-                            <th class="text-muted fw-semibold small py-3 px-4 border-0">Cover</th>
-                            <th class="text-muted fw-semibold small py-3 border-0">Details</th>
-                            <th class="text-muted fw-semibold small py-3 border-0">Category</th>
-                            <th class="text-muted fw-semibold small py-3 border-0">Price</th>
-                            <th class="text-muted fw-semibold small py-3 px-4 border-0 text-end">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="border-top-0">
-                    {% for i in bookdata %}
-                        <tr>
-                            <td class="px-4 py-3">
-                                {% if i.coverpic %}
-                                <img src="/{{ i.coverpic }}" style="width: 60px; height: 80px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm);" alt="cover"/>
-                                {% else %}
-                                <div style="width: 60px; height: 80px; background: var(--bg-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
-                                    <i data-lucide="image" style="width: 24px; height: 24px;"></i>
-                                </div>
-                                {% endif %}
-                            </td>
-                            <td class="py-3">
-                                <h6 class="fw-bold text-navy mb-1">{{ i.title }}</h6>
-                                <p class="text-muted small mb-0 text-truncate" style="max-width: 250px;">{{ i.description }}</p>
-                            </td>
-                            <td class="py-3">
-                                <span class="badge" style="background: rgba(0,180,216,0.1); color: var(--teal-dark); padding: 6px 12px; font-weight: 600;">{{ i.bookcategory }}</span>
-                            </td>
-                            <td class="py-3">
-                                {% if i.charge == 0 or i.charge == '0' %}
-                                <span class="badge" style="background: rgba(37,211,102,0.1); color: #2e7d32; padding: 6px 12px; font-weight: 600;">Free</span>
-                                {% else %}
-                                <span class="badge" style="background: rgba(244,162,97,0.1); color: #c87a2a; padding: 6px 12px; font-weight: 600;">₹{{ i.charge }}</span>
-                                {% endif %}
-                            </td>
-                            <td class="px-4 py-3 text-end">
-                                <div class="d-flex gap-2 justify-content-end">
-                                    {% if i.bookfile %}
-                                    <a href="/{{ i.bookfile }}" class="btn btn-sm btn-outline-primary rounded-3 d-flex align-items-center gap-1" download>
-                                        <i data-lucide="download" style="width: 14px; height: 14px;"></i> File
-                                    </a>
-                                    {% endif %}
-                                    <a href="/senior/deletebook/{{ i.id }}/" class="btn btn-sm btn-outline-danger rounded-3 d-flex align-items-center gap-1" onclick="return confirm('Delete \'{{ i.title }}\' permanently?')">
-                                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile Cards -->
-    <div class="d-md-none row g-3 fade-up visible" style="transition-delay: 100ms;">
-        {% for i in bookdata %}
-        <div class="col-12">
-            <div class="bn-card p-3 d-flex gap-3 align-items-start" style="border-radius: 16px;">
-                {% if i.coverpic %}
-                <img src="/{{ i.coverpic }}" style="width: 70px; height: 95px; object-fit: cover; border-radius: 8px; flex-shrink: 0;" alt="cover"/>
-                {% else %}
-                <div style="width: 70px; height: 95px; background: var(--bg-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); flex-shrink: 0;">
-                    <i data-lucide="image" style="width: 24px; height: 24px;"></i>
+    <!-- Tabs Content -->
+    <div class="tab-content" id="profileTabsContent">
+        
+        <!-- My Uploads Tab -->
+        <div class="tab-pane fade show active" id="uploads" role="tabpanel">
+            {% if bookdata %}
+            <!-- Desktop Table -->
+            <div class="d-none d-md-block fade-up visible" style="transition-delay: 100ms;">
+                <div class="bn-card" style="border-radius: 16px; overflow: hidden;">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0" style="background: transparent;">
+                            <thead style="background: var(--bg-color);">
+                                <tr>
+                                    <th class="text-muted fw-semibold small py-3 px-4 border-0">Cover</th>
+                                    <th class="text-muted fw-semibold small py-3 border-0">Details</th>
+                                    <th class="text-muted fw-semibold small py-3 border-0">Category</th>
+                                    <th class="text-muted fw-semibold small py-3 border-0">Price</th>
+                                    <th class="text-muted fw-semibold small py-3 px-4 border-0 text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="border-top-0">
+                            {% for i in bookdata %}
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        {% if i.coverpic %}
+                                        <img src="/{{ i.coverpic }}" class="skeleton" style="width: 60px; height: 80px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-sm);" alt="cover"/>
+                                        {% else %}
+                                        <div style="width: 60px; height: 80px; background: var(--bg-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                                            <i data-lucide="image" style="width: 24px; height: 24px;"></i>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-3">
+                                        <h6 class="fw-bold text-navy mb-1">{{ i.title }}</h6>
+                                        <p class="text-muted small mb-0 text-truncate" style="max-width: 250px;">{{ i.description }}</p>
+                                    </td>
+                                    <td class="py-3">
+                                        <span class="badge" style="background: rgba(0,180,216,0.1); color: var(--teal-dark); padding: 6px 12px; font-weight: 600;">{{ i.bookcategory }}</span>
+                                    </td>
+                                    <td class="py-3">
+                                        {% if i.charge == 0 or i.charge == '0' %}
+                                        <span class="badge" style="background: rgba(37,211,102,0.1); color: #2e7d32; padding: 6px 12px; font-weight: 600;">Free</span>
+                                        {% else %}
+                                        <span class="badge" style="background: rgba(244,162,97,0.1); color: #c87a2a; padding: 6px 12px; font-weight: 600;">₹{{ i.charge }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="px-4 py-3 text-end">
+                                        <div class="d-flex gap-2 justify-content-end">
+                                            {% if i.bookfile %}
+                                            <a href="/{{ i.bookfile }}" class="btn btn-sm btn-outline-primary rounded-3 d-flex align-items-center gap-1" download>
+                                                <i data-lucide="download" style="width: 14px; height: 14px;"></i> File
+                                            </a>
+                                            {% endif %}
+                                            <a href="/senior/deletebook/{{ i.id }}/" class="btn btn-sm btn-outline-danger rounded-3 d-flex align-items-center gap-1" onclick="return confirm('Delete \'{{ i.title }}\' permanently?')">
+                                                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                {% endif %}
-                
-                <div style="flex: 1; min-width: 0;">
-                    <h6 class="fw-bold text-navy mb-1 text-truncate">{{ i.title }}</h6>
-                    <div class="d-flex gap-2 mb-2">
-                        <span class="badge" style="background: rgba(0,180,216,0.1); color: var(--teal-dark);">{{ i.bookcategory }}</span>
-                        {% if i.charge == 0 or i.charge == '0' %}
-                        <span class="badge" style="background: rgba(37,211,102,0.1); color: #2e7d32;">Free</span>
+            </div>
+
+            <!-- Mobile Cards -->
+            <div class="d-md-none row g-3 fade-up visible" style="transition-delay: 100ms;">
+                {% for i in bookdata %}
+                <div class="col-12">
+                    <div class="bn-card p-3 d-flex gap-3 align-items-start" style="border-radius: 16px;">
+                        {% if i.coverpic %}
+                        <img src="/{{ i.coverpic }}" class="skeleton" style="width: 70px; height: 95px; object-fit: cover; border-radius: 8px; flex-shrink: 0;" alt="cover"/>
                         {% else %}
-                        <span class="badge" style="background: rgba(244,162,97,0.1); color: #c87a2a;">₹{{ i.charge }}</span>
+                        <div style="width: 70px; height: 95px; background: var(--bg-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); flex-shrink: 0;">
+                            <i data-lucide="image" style="width: 24px; height: 24px;"></i>
+                        </div>
                         {% endif %}
+                        
+                        <div style="flex: 1; min-width: 0;">
+                            <h6 class="fw-bold text-navy mb-1 text-truncate">{{ i.title }}</h6>
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge" style="background: rgba(0,180,216,0.1); color: var(--teal-dark);">{{ i.bookcategory }}</span>
+                                {% if i.charge == 0 or i.charge == '0' %}
+                                <span class="badge" style="background: rgba(37,211,102,0.1); color: #2e7d32;">Free</span>
+                                {% else %}
+                                <span class="badge" style="background: rgba(244,162,97,0.1); color: #c87a2a;">₹{{ i.charge }}</span>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-flex gap-2 flex-wrap mt-3">
+                                {% if i.bookfile %}
+                                <a href="/{{ i.bookfile }}" class="btn btn-sm btn-outline-primary rounded-3" style="font-size: 0.75rem; padding: 4px 8px;" download>
+                                    <i data-lucide="download" style="width: 12px; height: 12px;"></i> File
+                                </a>
+                                {% endif %}
+                                <a href="/senior/deletebook/{{ i.id }}/" class="btn btn-sm btn-outline-danger rounded-3" style="font-size: 0.75rem; padding: 4px 8px;" onclick="return confirm('Delete this book?')">
+                                    <i data-lucide="trash-2" style="width: 12px; height: 12px;"></i> Delete
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="d-flex gap-2 flex-wrap mt-3">
-                        {% if i.bookfile %}
-                        <a href="/{{ i.bookfile }}" class="btn btn-sm btn-outline-primary rounded-3" style="font-size: 0.75rem; padding: 4px 8px;" download>
-                            <i data-lucide="download" style="width: 12px; height: 12px;"></i> File
-                        </a>
-                        {% endif %}
-                        <a href="/senior/deletebook/{{ i.id }}/" class="btn btn-sm btn-outline-danger rounded-3" style="font-size: 0.75rem; padding: 4px 8px;" onclick="return confirm('Delete this book?')">
-                            <i data-lucide="trash-2" style="width: 12px; height: 12px;"></i> Delete
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <!-- Empty State -->
+            <div class="fade-up visible" style="transition-delay: 100ms; text-align: center; padding: 100px 20px;">
+                <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-4" style="width: 100px; height: 100px;">
+                    <i data-lucide="inbox" class="text-muted" style="width: 48px; height: 48px; opacity: 0.5;"></i>
+                </div>
+                <h4 class="fw-bold text-navy">Your library is empty</h4>
+                <p class="text-muted mb-4">Start adding books to share them with the community.</p>
+                <a href="{% url 'addbooks' %}" class="btn btn-primary fw-bold shadow-sm" style="padding: 12px 28px; border-radius: 12px;">
+                    <i data-lucide="plus" style="width: 18px; height: 18px; margin-right: 8px;"></i> Add Your First Book
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- My Wishlist Tab -->
+        <div class="tab-pane fade" id="wishlist" role="tabpanel">
+            {% if wishlist_books %}
+            <div class="row g-4 fade-up visible" style="transition-delay: 100ms;">
+                {% for book in wishlist_books %}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bn-card d-flex flex-column position-relative h-100" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-max="5" data-tilt-speed="400" style="border-radius: 16px; overflow: hidden; transform-style: preserve-3d;">
+                        <a href="{% url 'book_detail' book.id %}" class="text-decoration-none text-dark h-100 d-flex flex-column">
+                            <div class="position-relative bg-light" style="flex-shrink: 0;">
+                                {% if book.coverpic %}
+                                <img src="/{{ book.coverpic }}" class="skeleton w-100" alt="{{ book.title }}" style="height: 220px; object-fit: cover;">
+                                {% else %}
+                                <div class="w-100 d-flex align-items-center justify-content-center text-muted" style="height: 220px;">
+                                    <i data-lucide="image" style="width:48px;height:48px;opacity:0.3;"></i>
+                                </div>
+                                {% endif %}
+                                <span class="badge bg-warning text-dark position-absolute" style="bottom: 12px; right: 12px; z-index: 2;">
+                                    {% if book.charge == 0 or book.charge == '0' %}Free{% else %}₹{{ book.charge }}{% endif %}
+                                </span>
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1 bg-white">
+                                <h6 class="fw-bold mb-1 text-truncate">{{ book.title }}</h6>
+                                <p class="text-muted small mb-3 text-truncate">{{ book.bookcategory }}</p>
+                                <div class="mt-auto pt-2 border-top">
+                                    <form method="POST" action="{% url 'toggle_wishlist' book.id %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger w-100 rounded-3">
+                                            <i class="fa fa-heart"></i> Remove
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
+            {% else %}
+            <!-- Wishlist Empty State -->
+            <div class="fade-up visible" style="transition-delay: 100ms; text-align: center; padding: 100px 20px;">
+                <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-4" style="width: 100px; height: 100px;">
+                    <i data-lucide="heart" class="text-muted" style="width: 48px; height: 48px; opacity: 0.5;"></i>
+                </div>
+                <h4 class="fw-bold text-navy">Your wishlist is empty</h4>
+                <p class="text-muted mb-4">Discover books you love and save them here.</p>
+                <a href="{% url 'latestbooks' %}" class="btn btn-primary fw-bold shadow-sm" style="padding: 12px 28px; border-radius: 12px;">
+                    <i data-lucide="search" style="width: 18px; height: 18px; margin-right: 8px;"></i> Browse Books
+                </a>
+            </div>
+            {% endif %}
         </div>
-        {% endfor %}
     </div>
-
-    {% else %}
-    <!-- Empty State -->
-    <div class="fade-up visible" style="transition-delay: 100ms; text-align: center; padding: 100px 20px;">
-        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm mb-4" style="width: 100px; height: 100px;">
-            <i data-lucide="inbox" class="text-muted" style="width: 48px; height: 48px; opacity: 0.5;"></i>
-        </div>
-        <h4 class="fw-bold text-navy">Your library is empty</h4>
-        <p class="text-muted mb-4">Start adding books to share them with the community.</p>
-        <a href="{% url 'addbooks' %}" class="btn btn-primary fw-bold shadow-sm" style="padding: 12px 28px; border-radius: 12px;">
-            <i data-lucide="plus" style="width: 18px; height: 18px; margin-right: 8px;"></i> Add Your First Book
-        </a>
-    </div>
-    {% endif %}
 
 </div>
 
