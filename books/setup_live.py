@@ -9,9 +9,11 @@ def run_setup():
     from senior.models import reg, category
     from django.contrib.auth.hashers import make_password
     
-    # 1. Add "Live Book" category
-    category.objects.get_or_create(cname='Live Book')
-    print("✅ 'Live Book' category successfully added.")
+    # 1. Add Categories
+    categories = ["UP Board", "CBSE", "ICSE", "Novels", "Story Books", "Technical", "Others", "Live Book"]
+    for c in categories:
+        category.objects.get_or_create(cname=c)
+    print("✅ Categories successfully added.")
     
     # 2. Create Demo User Account
     email = 'demo@booknest.in'
