@@ -3,10 +3,32 @@
 {% block content %}
 
 <!-- Hero Section -->
-<div class="swiper heroSwiper" id="vanta-bg" style="height: 600px; width: 100%; position: relative;">
+<div class="swiper heroSwiper" style="height: 600px; width: 100%; position: relative; background: linear-gradient(135deg, #0d1b2a, #1b263b);">
+    
+    <!-- 3D Floating Books Background -->
+    <div class="floating-books-container position-absolute w-100 h-100" style="top:0; left:0; pointer-events: none; z-index: 1; overflow: hidden;">
+        {% for book in featured_books|slice:":4" %}
+        <div class="book-3d-wrapper floating-book" style="
+            width: {% if forloop.counter == 1 %}120px{% elif forloop.counter == 2 %}140px{% elif forloop.counter == 3 %}100px{% else %}130px{% endif %}; 
+            height: {% if forloop.counter == 1 %}180px{% elif forloop.counter == 2 %}200px{% elif forloop.counter == 3 %}150px{% else %}190px{% endif %}; 
+            top: {% if forloop.counter == 1 %}10%{% elif forloop.counter == 2 %}50%{% elif forloop.counter == 3 %}60%{% else %}20%{% endif %}; 
+            left: {% if forloop.counter == 1 %}10%{% elif forloop.counter == 2 %}80%{% elif forloop.counter == 3 %}15%{% else %}70%{% endif %}; 
+            animation-delay: {% if forloop.counter == 1 %}0s{% elif forloop.counter == 2 %}1.5s{% elif forloop.counter == 3 %}3s{% else %}4.5s{% endif %};
+        ">
+            <div class="book-3d shadow-lg">
+                {% if book.coverpic %}
+                <img src="/{{ book.coverpic }}" class="w-100 h-100" style="object-fit: cover; position: absolute; top:0; left:0; border-radius: 4px 12px 12px 4px; transform: translateZ(15px);" alt="{{ book.title }}">
+                {% else %}
+                <div class="w-100 h-100 bg-primary border text-white d-flex align-items-center justify-content-center fw-bold text-center p-2" style="position: absolute; transform: translateZ(15px); border-radius: 4px 12px 12px 4px; font-size: 14px;">{{ book.title }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
     <div class="swiper-wrapper">
         <!-- Slide 1 -->
-        <div class="swiper-slide position-relative overflow-hidden" style="background: transparent;">
+        <div class="swiper-slide position-relative overflow-hidden h-100" style="background: transparent;">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
                 <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">Discover. Share. <span style="color: var(--teal-light);">Read.</span></h1>
                 <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Join India's fastest growing community of readers. Exchange academic books, novels, and more.</p>
@@ -18,7 +40,7 @@
         </div>
         
         <!-- Slide 2 -->
-        <div class="swiper-slide position-relative overflow-hidden" style="background: transparent;">
+        <div class="swiper-slide position-relative overflow-hidden h-100" style="background: transparent;">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
                 <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">Your Digital <span style="color: var(--gold);">Library</span></h1>
                 <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Access thousands of technical resources, board materials, and stories contributed by seniors.</p>
@@ -29,7 +51,7 @@
         </div>
 
         <!-- Slide 3 -->
-        <div class="swiper-slide position-relative overflow-hidden" style="background: transparent;">
+        <div class="swiper-slide position-relative overflow-hidden h-100" style="background: transparent;">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 10;">
                 <h1 class="display-3 fw-bold text-white mb-3" data-swiper-parallax="-300" style="text-shadow: 0 4px 15px rgba(0,0,0,0.5);">Smart <span style="color: var(--teal-light);">Exchange</span></h1>
                 <p class="lead text-white-50 mb-5" data-swiper-parallax="-200" style="max-width: 600px; margin: 0 auto; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">List the books you don't need, find the ones you do. Sustainable reading for everyone.</p>
@@ -286,26 +308,6 @@
                 prevEl: '.swiper-button-prev',
             },
         });
-        
-        // Initialize Vanta.js 3D Background
-        if (window.VANTA) {
-            VANTA.NET({
-                el: "#vanta-bg",
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.00,
-                minWidth: 200.00,
-                scale: 1.00,
-                scaleMobile: 1.00,
-                color: 0x00b4d8,
-                backgroundColor: 0x0d1b2a,
-                points: 15.00,
-                maxDistance: 22.00,
-                spacing: 18.00,
-                showDots: true
-            });
-        }
     });
 </script>
 

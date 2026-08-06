@@ -744,3 +744,21 @@ img.skeleton {
     z-index: 3;
     background-image: repeating-linear-gradient(to right, #ccc 0, #ccc 1px, #f4f4f4 1px, #f4f4f4 3px);
 }
+
+/* Floating Book Animation for Hero Section */
+.floating-book {
+    position: absolute;
+    animation: floatBook 12s ease-in-out infinite;
+}
+
+@keyframes floatBook {
+    0% {
+        transform: translateY(0px) rotateY(-25deg) rotateX(5deg);
+    }
+    50% {
+        transform: translateY(-20px) rotateY(-15deg) rotateX(10deg);
+    }
+    100% {
+        transform: translateY(0px) rotateY(-25deg) rotateX(5deg);
+    }
+}
