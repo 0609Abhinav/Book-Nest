@@ -438,3 +438,16 @@ def book_detail(request, book_id):
     except addbooks.DoesNotExist:
         messages.error(request, "Book not found or pending review.")
         return redirect('latestbooks')
+
+@login_required_custom
+def toggle_wishlist(request, book_id):
+    if request.method == 'POST':
+        user_email = request.session.get('user')
+        wishlist_item = Wishlist.objects.filter(user_email=user_email, book_id=book_id).first()
+        if wishlist_item:
+            wishlist_item.delete()
+            messages.success(request, "Removed from wishlist.")
+        else:
+            Wishlist.objects.create(user_email=user_email, book_id=book_id)
+            messages.success(request, "Added to wishlist.")
+    return redirect('book_detail', book_id=book_id)

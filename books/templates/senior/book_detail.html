@@ -39,9 +39,12 @@
                             </a>
                             {% endif %}
                             
-                            <button class="btn btn-outline-danger" style="padding: 12px; border-radius: 10px; width: 60px;" title="{% if in_wishlist %}Remove from Wishlist{% else %}Add to Wishlist{% endif %}">
-                                <i class="fa {% if in_wishlist %}fa-heart{% else %}fa-heart-o{% endif %}"></i>
-                            </button>
+                            <form method="POST" action="{% url 'toggle_wishlist' book.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger" style="padding: 12px; border-radius: 10px; width: 60px;" title="{% if in_wishlist %}Remove from Wishlist{% else %}Add to Wishlist{% endif %}">
+                                    <i class="fa {% if in_wishlist %}fa-heart{% else %}fa-heart-o{% endif %}"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

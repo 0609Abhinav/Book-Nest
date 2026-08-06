@@ -22,4 +22,5 @@ urlpatterns=[
     path('deactivate/', views.deactivate_account, name='deactivate_account'),
     path('logout/', views.logout_view, name='logout'),
     path('deletebook/<int:book_id>/', views.deletebook, name='deletebook'),
+    path('toggle_wishlist/<int:book_id>/', views.toggle_wishlist, name='toggle_wishlist'),
 ]
