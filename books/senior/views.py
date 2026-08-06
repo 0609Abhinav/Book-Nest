@@ -12,8 +12,13 @@ def home(request):
     cdata = category.objects.all().order_by('-id')
     citydata = city.objects.all()
     newdata = new.objects.all()
-    # In phase 2, we will fetch trending books. For now, fetch latest approved.
-    return render(request, 'senior/index.html', {"data": cdata, "citydata": citydata, "newdata": newdata})
+    featured_books = addbooks.objects.filter(status='approved').order_by('-created_at')[:10]
+    return render(request, 'senior/index.html', {
+        "data": cdata, 
+        "citydata": citydata, 
+        "newdata": newdata,
+        "featured_books": featured_books
+    })
 
 @rate_limit('contact', 5, 3600)
 def contactus(request):

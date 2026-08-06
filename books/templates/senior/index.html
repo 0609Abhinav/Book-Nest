@@ -55,8 +55,48 @@
     <div class="swiper-pagination"></div>
 </div>
 
+</div>
+
+<!-- 3D Coverflow Featured Books Section -->
+{% if featured_books %}
+<div class="py-5" style="background: var(--navy); overflow: hidden; position: relative;">
+    <div class="container pb-5">
+        <div class="text-center mb-5" data-aos="fade-in">
+            <h6 class="text-gold fw-bold text-uppercase tracking-wider">Premium Selection</h6>
+            <h2 class="display-6 fw-bold text-white">Featured Books</h2>
+        </div>
+        
+        <!-- Swiper 3D Coverflow -->
+        <div class="swiper coverflowSwiper" style="width: 100%; padding-top: 50px; padding-bottom: 50px;">
+            <div class="swiper-wrapper">
+                {% for book in featured_books %}
+                <div class="swiper-slide" style="width: 300px; height: 400px; background-position: center; background-size: cover;">
+                    <a href="{% url 'book_detail' book.id %}" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-lg" style="border-radius: 16px; overflow: hidden; transform-style: preserve-3d;">
+                            {% if book.coverpic %}
+                            <img src="/{{ book.coverpic }}" class="skeleton w-100 h-100" style="object-fit: cover;" alt="{{ book.title }}">
+                            {% else %}
+                            <div class="w-100 h-100 bg-light d-flex align-items-center justify-content-center text-muted">
+                                <i data-lucide="book" style="width: 64px; height: 64px;"></i>
+                            </div>
+                            {% endif %}
+                            <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); color: white;">
+                                <h5 class="fw-bold mb-1 text-truncate">{{ book.title }}</h5>
+                                <span class="badge bg-teal">{{ book.bookcategory }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <!-- Stats Section -->
-<div class="bg-white py-5" style="margin-top: -40px; position: relative; z-index: 10; border-radius: 40px 40px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.05);">
+<div class="bg-white py-5" style="margin-top: -40px; position: relative; z-index: 10; border-radius: 40px 40px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.1);">
     <div class="container">
         <div class="row text-center g-4">
             <div class="col-md-4 stat-number-wrapper" data-aos="fade-up">
@@ -291,6 +331,30 @@
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        // Initialize Coverflow Swiper
+        const coverflowSwiper = new Swiper('.coverflowSwiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true,
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
             },
         });
     });
