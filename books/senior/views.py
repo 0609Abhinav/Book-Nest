@@ -307,13 +307,19 @@ def latest(request):
     else:
         books_query = books_query.order_by('-created_at')
         
+    user_email = request.session.get('user')
+    user_wishlist_books = set()
+    if user_email:
+        user_wishlist_books = set(Wishlist.objects.filter(user_email=user_email).values_list('book_id', flat=True))
+        
     books_data = []
     for book in books_query:
+        in_wishlist = book.id in user_wishlist_books
         try:
             seller = reg.objects.get(email=book.authorid)
-            books_data.append({'book': book, 'seller': seller})
+            books_data.append({'book': book, 'seller': seller, 'in_wishlist': in_wishlist})
         except reg.DoesNotExist:
-            books_data.append({'book': book, 'seller': None})
+            books_data.append({'book': book, 'seller': None, 'in_wishlist': in_wishlist})
 
     return render(request, 'senior/latestbooks.html', {"bdetail": books_data, "data": cdata, "current_cat": cat_id, "current_sort": sort_by})
 

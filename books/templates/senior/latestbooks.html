@@ -113,6 +113,14 @@
                                 <div class="flex-grow-1">
                                     <span class="fs-5 fw-bold text-dark">₹{{ item.book.charge }}</span>
                                 </div>
+                                
+                                <form method="POST" action="{% url 'toggle_wishlist' item.book.id %}" class="me-2 mb-0">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-danger btn-sm p-2" title="Toggle Wishlist" style="border-radius: 8px;">
+                                        <i data-lucide="heart" style="width:16px;height:16px; {% if item.in_wishlist %}fill:currentColor;{% endif %}"></i>
+                                    </button>
+                                </form>
+
                                 {% if item.book.bookfile %}
                                 <a href="/{{ item.book.bookfile }}" class="btn btn-primary btn-sm px-3 py-2" download title="Download Book">
                                     <i data-lucide="download" style="width:16px;height:16px;"></i> Get

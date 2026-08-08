@@ -13,6 +13,7 @@ files_to_upload = [
     'books/static/css/global.css',
     'books/books/settings.py',
     'books/senior/views.py',
+    'books/.env',
 ]
 
 print("=== Uploading files ===")
