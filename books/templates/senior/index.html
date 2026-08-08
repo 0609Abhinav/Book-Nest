@@ -2,92 +2,318 @@
 {% load static %}
 {% block content %}
 
-<!-- Hero Section -->
+<!-- Hero Section with 3D Animated Book -->
 <style>
     .hero-section {
-        height: 600px; width: 100%; position: relative;
+        min-height: 620px; width: 100%; position: relative;
         background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
         overflow: hidden;
-        display: flex; align-items: center; justify-content: center;
+        display: flex; align-items: center;
     }
-    /* Animated grid lines background */
     .hero-grid {
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         background-image:
-            linear-gradient(rgba(0,180,216,0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,180,216,0.05) 1px, transparent 1px);
+            linear-gradient(rgba(0,180,216,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,180,216,0.04) 1px, transparent 1px);
         background-size: 60px 60px;
         animation: gridMove 20s linear infinite;
     }
-    @keyframes gridMove {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(60px, 60px); }
-    }
-    /* Glowing orb */
-    .hero-orb {
-        position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
-    }
-    /* Rotating headline text */
+    @keyframes gridMove { 0% { transform: translate(0,0); } 100% { transform: translate(60px,60px); } }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; }
+
+    /* Rotating headline */
     .hero-headline-rotator {
         display: inline-block; position: relative; height: 1.2em; overflow: hidden; vertical-align: bottom;
     }
-    .hero-headline-rotator span {
-        display: block;
-        animation: rotateWords 9s ease-in-out infinite;
-    }
+    .hero-headline-rotator span { display: block; animation: rotateWords 9s ease-in-out infinite; }
     @keyframes rotateWords {
-        0%, 28%   { transform: translateY(0%);   opacity: 1; }
-        33%, 61%  { transform: translateY(-100%); opacity: 1; }
-        66%, 94%  { transform: translateY(-200%); opacity: 1; }
-        100%      { transform: translateY(-300%); opacity: 0; }
+        0%,28%{transform:translateY(0%);opacity:1}
+        33%,61%{transform:translateY(-100%);opacity:1}
+        66%,94%{transform:translateY(-200%);opacity:1}
+        100%{transform:translateY(-300%);opacity:0}
+    }
+
+    /* === 3D ANIMATED BOOK === */
+    .hero-book-stage {
+        perspective: 1200px;
+        width: 320px; height: 420px;
+        position: relative;
+        animation: bookZoomIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    @keyframes bookZoomIn {
+        0% { transform: scale(0.3) rotateY(40deg); opacity: 0; }
+        60% { transform: scale(1.05) rotateY(-5deg); opacity: 1; }
+        100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+    }
+
+    .hero-book {
+        width: 100%; height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateY(-25deg) rotateX(5deg);
+        animation: bookFloat 6s ease-in-out infinite 1.5s;
+    }
+    @keyframes bookFloat {
+        0%,100% { transform: rotateY(-25deg) rotateX(5deg) translateY(0); }
+        50% { transform: rotateY(-20deg) rotateX(8deg) translateY(-12px); }
+    }
+
+    /* Book Cover (front) */
+    .hero-book-cover {
+        position: absolute; width: 100%; height: 100%;
+        background: linear-gradient(145deg, #00b4d8, #0077b6);
+        border-radius: 4px 16px 16px 4px;
+        transform: translateZ(20px);
+        box-shadow: 0 0 30px rgba(0,180,216,0.4), inset 0 0 60px rgba(0,0,0,0.15);
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: 30px; text-align: center; color: white;
+        backface-visibility: hidden;
+    }
+    .hero-book-cover .book-icon {
+        font-size: 48px; margin-bottom: 16px; opacity: 0.9;
+        animation: iconPulse 3s ease-in-out infinite;
+    }
+    @keyframes iconPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+    .hero-book-cover h3 { font-size: 22px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .hero-book-cover p { font-size: 12px; opacity: 0.8; letter-spacing: 2px; text-transform: uppercase; }
+
+    /* Book Spine */
+    .hero-book-spine {
+        position: absolute; left: -20px; top: 0;
+        width: 40px; height: 100%;
+        background: linear-gradient(180deg, #005f73, #0a9396);
+        transform: rotateY(-90deg) translateZ(0px);
+        transform-origin: right center;
+        border-radius: 8px 0 0 8px;
+        display: flex; align-items: center; justify-content: center;
+        writing-mode: vertical-rl; text-orientation: mixed;
+        color: rgba(255,255,255,0.9); font-weight: 700; font-size: 14px;
+        letter-spacing: 3px; text-transform: uppercase;
+        box-shadow: inset -5px 0 15px rgba(0,0,0,0.3);
+    }
+
+    /* Book Back */
+    .hero-book-back {
+        position: absolute; width: 100%; height: 100%;
+        background: linear-gradient(145deg, #003845, #005f73);
+        border-radius: 4px 16px 16px 4px;
+        transform: translateZ(-20px);
+    }
+
+    /* Page Edges (right side) */
+    .hero-book-pages-edge {
+        position: absolute; right: -3px; top: 8px;
+        width: 6px; height: calc(100% - 16px);
+        background: repeating-linear-gradient(to bottom, #f8f8f0 0, #f8f8f0 2px, #e8e8e0 2px, #e8e8e0 3px);
+        transform: translateZ(10px);
+        border-radius: 0 3px 3px 0;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    }
+
+    /* Top/Bottom page edges */
+    .hero-book-pages-top {
+        position: absolute; top: -3px; left: 8px;
+        width: calc(100% - 16px); height: 6px;
+        background: repeating-linear-gradient(to right, #f8f8f0 0, #f8f8f0 2px, #e8e8e0 2px, #e8e8e0 3px);
+        transform: translateZ(10px);
+        border-radius: 3px 3px 0 0;
+    }
+
+    /* Turning Pages */
+    .hero-turning-page {
+        position: absolute; width: calc(100% - 8px); height: calc(100% - 8px);
+        top: 4px; left: 4px;
+        transform-origin: left center;
+        transform-style: preserve-3d;
+        border-radius: 2px 12px 12px 2px;
+        backface-visibility: hidden;
+    }
+    .hero-turning-page .page-front {
+        position: absolute; width: 100%; height: 100%;
+        background: linear-gradient(135deg, #fffdf5, #f5f0e0);
+        border-radius: 2px 12px 12px 2px;
+        padding: 30px;
+        box-shadow: inset -8px 0 20px rgba(0,0,0,0.06);
+        backface-visibility: hidden;
+    }
+    .hero-turning-page .page-back {
+        position: absolute; width: 100%; height: 100%;
+        background: linear-gradient(135deg, #f0ebe0, #e8e3d5);
+        border-radius: 2px 12px 12px 2px;
+        transform: rotateY(180deg);
+        backface-visibility: hidden;
+        box-shadow: inset 8px 0 20px rgba(0,0,0,0.08);
+    }
+    /* Page content lines */
+    .page-lines {
+        width: 80%; height: 8px; background: rgba(0,0,0,0.08);
+        border-radius: 4px; margin-bottom: 12px;
+    }
+    .page-lines.short { width: 55%; }
+    .page-lines.med { width: 70%; }
+
+    /* Page turn animations */
+    .hero-turning-page:nth-child(1) {
+        transform: translateZ(18px);
+        animation: pageTurn1 8s ease-in-out infinite 2s;
+    }
+    .hero-turning-page:nth-child(2) {
+        transform: translateZ(16px);
+        animation: pageTurn2 8s ease-in-out infinite 2s;
+    }
+    .hero-turning-page:nth-child(3) {
+        transform: translateZ(14px);
+        animation: pageTurn3 8s ease-in-out infinite 2s;
+    }
+
+    @keyframes pageTurn1 {
+        0%,15% { transform: translateZ(18px) rotateY(0deg); }
+        25%,40% { transform: translateZ(18px) rotateY(-160deg); }
+        55%,100% { transform: translateZ(18px) rotateY(0deg); }
+    }
+    @keyframes pageTurn2 {
+        0%,20% { transform: translateZ(16px) rotateY(0deg); }
+        30%,45% { transform: translateZ(16px) rotateY(-155deg); }
+        60%,100% { transform: translateZ(16px) rotateY(0deg); }
+    }
+    @keyframes pageTurn3 {
+        0%,25% { transform: translateZ(14px) rotateY(0deg); }
+        35%,50% { transform: translateZ(14px) rotateY(-150deg); }
+        65%,100% { transform: translateZ(14px) rotateY(0deg); }
+    }
+
+    /* Glow ring around book */
+    .hero-book-glow {
+        position: absolute; width: 340px; height: 440px;
+        top: -10px; left: -10px;
+        border: 2px solid rgba(0,180,216,0.15);
+        border-radius: 20px;
+        transform: translateZ(-30px);
+        animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+        0%,100% { box-shadow: 0 0 20px rgba(0,180,216,0.1), 0 0 60px rgba(0,180,216,0.05); }
+        50% { box-shadow: 0 0 40px rgba(0,180,216,0.25), 0 0 80px rgba(0,180,216,0.1); }
+    }
+
+    /* Sparkle particles */
+    .sparkle {
+        position: absolute; width: 4px; height: 4px;
+        background: rgba(0,180,216,0.8); border-radius: 50%;
+        animation: sparkleFloat 4s ease-in-out infinite;
+    }
+    @keyframes sparkleFloat {
+        0%,100% { transform: translateY(0) scale(1); opacity: 0.8; }
+        50% { transform: translateY(-30px) scale(1.5); opacity: 0.2; }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 991px) {
+        .hero-book-stage { width: 220px; height: 300px; margin-top: 30px; }
+        .hero-section .row { flex-direction: column-reverse; }
     }
 </style>
 
 <div class="hero-section">
-    <!-- Background Effects -->
     <div class="hero-grid"></div>
-    <div class="hero-orb" style="width: 400px; height: 400px; background: var(--teal); top: -100px; right: -100px;"></div>
+    <div class="hero-orb" style="width: 400px; height: 400px; background: var(--teal); top: -100px; right: -50px;"></div>
     <div class="hero-orb" style="width: 300px; height: 300px; background: var(--gold); bottom: -80px; left: -80px;"></div>
 
-    <!-- 3D Floating Books -->
-    {% for book in featured_books|slice:":4" %}
-    <div class="floating-book" style="
-        position: absolute; pointer-events: none; z-index: 2; perspective: 800px;
-        width: {% if forloop.counter == 1 %}110px{% elif forloop.counter == 2 %}130px{% elif forloop.counter == 3 %}90px{% else %}120px{% endif %};
-        height: {% if forloop.counter == 1 %}160px{% elif forloop.counter == 2 %}185px{% elif forloop.counter == 3 %}130px{% else %}170px{% endif %};
-        top: {% if forloop.counter == 1 %}8%{% elif forloop.counter == 2 %}55%{% elif forloop.counter == 3 %}65%{% else %}15%{% endif %};
-        left: {% if forloop.counter == 1 %}5%{% elif forloop.counter == 2 %}85%{% elif forloop.counter == 3 %}8%{% else %}78%{% endif %};
-        opacity: 0.6;
-    ">
-        <div class="book-3d-wrapper" style="width:100%; height:100%;">
-            <div class="book-3d">
-                {% if book.coverpic %}
-                <img src="/{{ book.coverpic }}" class="w-100 h-100" style="object-fit: cover; position: absolute; top:0; left:0; border-radius: 4px 12px 12px 4px; transform: translateZ(15px);" alt="{{ book.title }}">
-                {% else %}
-                <div class="w-100 h-100 d-flex align-items-center justify-content-center fw-bold text-center text-white p-2" style="position: absolute; transform: translateZ(15px); border-radius: 4px 12px 12px 4px; font-size: 13px; background: var(--teal);">{{ book.title }}</div>
-                {% endif %}
+    <div class="container position-relative" style="z-index: 10;">
+        <div class="row align-items-center g-5">
+            <!-- Left: Text Content -->
+            <div class="col-lg-6 text-center text-lg-start" data-aos="fade-right">
+                <h1 class="display-3 fw-bold text-white mb-3" style="text-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+                    Discover. Share.
+                    <span class="hero-headline-rotator" style="color: var(--teal-light);">
+                        <span>Read.</span>
+                        <span>Learn.</span>
+                        <span>Grow.</span>
+                        <span>Read.</span>
+                    </span>
+                </h1>
+                <p class="lead mb-5" style="color: rgba(255,255,255,0.7); max-width: 500px;">
+                    Join India's fastest growing community of readers. Exchange academic books, novels, and more.
+                </p>
+                <div class="d-flex gap-3 flex-wrap justify-content-center justify-content-lg-start">
+                    <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5 shadow-lg" style="border-radius: 50px;">Browse Library</a>
+                    <a href="{% url 'addbooks' %}" class="btn btn-outline-light btn-lg px-5" style="border-radius: 50px; border-width: 2px;">Share a Book</a>
+                </div>
             </div>
-        </div>
-    </div>
-    {% endfor %}
 
-    <!-- Hero Content -->
-    <div class="text-center position-relative" style="z-index: 10; max-width: 800px; padding: 0 20px;">
-        <h1 class="display-3 fw-bold text-white mb-3" style="text-shadow: 0 4px 20px rgba(0,0,0,0.6);">
-            Discover. Share.
-            <span class="hero-headline-rotator" style="color: var(--teal-light);">
-                <span>Read.</span>
-                <span>Learn.</span>
-                <span>Grow.</span>
-                <span>Read.</span>
-            </span>
-        </h1>
-        <p class="lead mb-5" style="color: rgba(255,255,255,0.7); text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
-            Join India's fastest growing community of readers. Exchange academic books, novels, and more.
-        </p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="{% url 'latestbooks' %}" class="btn btn-primary btn-lg px-5 shadow-lg" style="border-radius: 50px;">Browse Library</a>
-            <a href="{% url 'addbooks' %}" class="btn btn-outline-light btn-lg px-5" style="border-radius: 50px; border-width: 2px;">Share a Book</a>
+            <!-- Right: 3D Animated Book -->
+            <div class="col-lg-6 d-flex justify-content-center" data-aos="fade-left" data-aos-delay="300">
+                <div class="hero-book-stage">
+                    <div class="hero-book">
+                        <!-- Glow ring -->
+                        <div class="hero-book-glow"></div>
+
+                        <!-- Back cover -->
+                        <div class="hero-book-back"></div>
+
+                        <!-- Spine -->
+                        <div class="hero-book-spine">BOOKNEST</div>
+
+                        <!-- Page edges -->
+                        <div class="hero-book-pages-edge"></div>
+                        <div class="hero-book-pages-top"></div>
+
+                        <!-- Turning Pages -->
+                        <div class="hero-turning-page">
+                            <div class="page-front" style="padding-top: 40px;">
+                                <div class="page-lines" style="width:40%; height:12px; margin-bottom:20px;"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines med"></div>
+                                <div class="page-lines short"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines med"></div>
+                                <div class="page-lines short"></div>
+                                <div class="page-lines"></div>
+                            </div>
+                            <div class="page-back"></div>
+                        </div>
+                        <div class="hero-turning-page">
+                            <div class="page-front" style="padding-top: 40px;">
+                                <div class="page-lines short" style="height:12px; margin-bottom:20px;"></div>
+                                <div class="page-lines med"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines short"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines short"></div>
+                                <div class="page-lines med"></div>
+                            </div>
+                            <div class="page-back"></div>
+                        </div>
+                        <div class="hero-turning-page">
+                            <div class="page-front" style="padding-top: 40px;">
+                                <div class="page-lines med" style="height:12px; margin-bottom:20px;"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines short"></div>
+                                <div class="page-lines med"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines"></div>
+                                <div class="page-lines short"></div>
+                            </div>
+                            <div class="page-back"></div>
+                        </div>
+
+                        <!-- Front Cover -->
+                        <div class="hero-book-cover">
+                            <div class="book-icon">📚</div>
+                            <h3>BookNest</h3>
+                            <p>Exchange Hub</p>
+                            <div style="width: 60px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 2px; margin-top: 12px;"></div>
+                        </div>
+
+                        <!-- Sparkle particles -->
+                        <div class="sparkle" style="top: -15px; right: 30px; animation-delay: 0s;"></div>
+                        <div class="sparkle" style="top: 50%; right: -20px; animation-delay: 1s; width: 6px; height: 6px;"></div>
+                        <div class="sparkle" style="bottom: 20px; left: -15px; animation-delay: 2s;"></div>
+                        <div class="sparkle" style="top: 30%; left: -25px; animation-delay: 0.5s; width: 5px; height: 5px;"></div>
+                        <div class="sparkle" style="bottom: -10px; right: 40%; animation-delay: 1.5s;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
