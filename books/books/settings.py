@@ -17,11 +17,21 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR=BASE_DIR/'templates'
 
+# --- Load .env variables ---
+env_path = BASE_DIR / '.env'
+if env_path.exists():
+    with open(env_path) as f:
+        for line in f:
+            if line.strip() and not line.startswith('#'):
+                key, value = line.strip().split('=', 1)
+                os.environ[key] = value.strip()
+# ---------------------------
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wlh@xblowj_u_hq)l-yg@ovmzi+4^roz#20rzbiktq4o3aiq0z'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key-for-dev-only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -138,13 +148,12 @@ LOGIN_REDIRECT_URL = '/senior/home/'
 
 # Email Backend (SMTP configuration for real emails)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'abhinavtripathi6sep@gmail.com'
-# To make emails work, set this to your Google App Password. 
-# For now, it's left blank so you can securely add it later.
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_USER = os.environ.get('BREVO_SMTP_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('BREVO_SMTP_KEY', '')
+DEFAULT_FROM_EMAIL = f"BookNest <{EMAIL_HOST_USER}>"
 
 # File Upload Limits (5MB)
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
