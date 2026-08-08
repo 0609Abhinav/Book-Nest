@@ -57,6 +57,11 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--bg-color);
