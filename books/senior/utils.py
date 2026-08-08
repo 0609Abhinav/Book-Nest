@@ -31,9 +31,13 @@ def send_otp_email(email):
         }
         try:
             # Using Brevo API via HTTPS because PythonAnywhere free tier blocks SMTP (port 587)
-            requests.post(url, headers=headers, data=json.dumps(data), timeout=10)
+            response = requests.post(url, headers=headers, data=json.dumps(data), timeout=10)
+            if response.status_code != 201:
+                print(f"Brevo API Error ({response.status_code}): {response.text}")
+                print(f"--- FALLBACK OTP FOR {email}: {otp} ---")
         except Exception as e:
-            print(f"Brevo API error: {e}")
+            print(f"Brevo API Request Failed: {e}")
+            print(f"--- FALLBACK OTP FOR {email}: {otp} ---")
     else:
         # Fallback to local console if keys are missing
         print(f"--- OTP FOR {email}: {otp} ---")

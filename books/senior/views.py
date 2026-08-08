@@ -47,9 +47,16 @@ def signu(request):
     if request.method == 'POST':
         Email = request.POST.get("email", "")
         if reg.objects.filter(email=Email).exists():
-            messages.error(request, "Email is already registered.")
-            return redirect('/senior/signup/')
-            
+            existing_user = reg.objects.get(email=Email)
+            if not existing_user.is_verified:
+                # User exists but failed to verify previously, resend OTP
+                send_otp_email(Email)
+                request.session['verify_email'] = Email
+                messages.success(request, "Account exists but is not verified. A new OTP has been sent.")
+                return redirect('verify_email')
+            else:
+                messages.error(request, "Email is already registered. Please login.")
+                return redirect('/senior/signup/')
         Name = request.POST.get("name", "")
         Gender = request.POST.get("gender", "")
         DOB = request.POST.get("dob", "")
