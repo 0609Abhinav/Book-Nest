@@ -9,10 +9,12 @@ headers = {'Authorization': f'Token {token}'}
 files_to_upload = [
     'books/templates/senior/index.html',
     'books/templates/senior/book_detail.html',
+    'books/templates/senior/latestbooks.html',
     'books/templates/base.html',
     'books/static/css/global.css',
     'books/books/settings.py',
     'books/senior/views.py',
+    'books/senior/utils.py',
     'books/.env',
 ]
 
